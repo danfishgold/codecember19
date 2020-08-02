@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/lib/p5.1.1.9.js"></script>
+    <script src="utils.js"></script>
+    <script src="sketch01.js"></script>
+    <script src="sketch02.js"></script>
+    <script src="sketch03.js"></script>
+    <style>
+      main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        justify-content: center;
+      }
+
+      main canvas {
+        width: 100% !important;
+        height: unset !important;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const sketches = [s01, s02, s03].map((sketchMaker) => {
+        const s = new p5(sketchMaker(800))
+        return s
+      })
+    </script>
+  </body>
+</html>
