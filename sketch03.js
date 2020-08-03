@@ -5,9 +5,6 @@ const s03 = (canvasSide) => (s) => {
   }
 
   const f = canvasSide / 800
-  const offsetX = -canvasSide / 2
-  const offsetY = -canvasSide
-
   const side = canvasSide / 16
 
   // https://coolors.co/dd6e42-e8dab2-4f6d7a-c0d6df-eaeaea
@@ -26,31 +23,26 @@ const s03 = (canvasSide) => (s) => {
 
   s.draw = () => {
     s.background(colors.background)
-    const dx1 = 0
-    const dy1 = side * s.sqrt(3)
-    const dx2 = side * 1.5
-    const dy2 = (side / 2) * s.sqrt(3)
-
-    for (const i in range(15)) {
-      for (const j in range(10)) {
-        drawStar(
-          offsetX + canvasSide / 2 + i * dx1 + j * dx2,
-          offsetY + canvasSide / 2 + i * dy1 + j * dy2,
-          side,
-        )
-      }
+    for ([x, y] of hexagonalGrid(
+      canvasSide / 2 - side / 4,
+      canvasSide / 2 + side / 2,
+      side * s.sqrt(3),
+      5,
+      90,
+    )) {
+      drawStar(x, y)
     }
     drawBorder(s, colors.triangle)
     s.noLoop()
   }
 
-  function drawStar(x, y, len) {
+  function drawStar(x, y) {
     // big lines
     s.stroke(colors.star)
     s.strokeWeight(2 * f)
     for (const angle of [30, 90, 150, 210, 270, 330]) {
-      const dx = len * s.cos(angle)
-      const dy = len * s.sin(angle)
+      const dx = side * s.cos(angle)
+      const dy = side * s.sin(angle)
       const fudge = s.random(-0.1, 0)
       s.line(
         x,
@@ -61,8 +53,8 @@ const s03 = (canvasSide) => (s) => {
     }
 
     for (const angle of [0, 60, 120, 180, 240, 300]) {
-      const dx = len * s.cos(angle)
-      const dy = len * s.sin(angle)
+      const dx = side * s.cos(angle)
+      const dy = side * s.sin(angle)
       // small lines
       s.stroke(colors.star)
       s.strokeWeight(f)
