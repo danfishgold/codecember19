@@ -10,6 +10,7 @@
     <script src="sketch02.js"></script>
     <script src="sketch03.js"></script>
     <script src="sketch04.js"></script>
+    <script src="sketch05.js"></script>
     <style>
       main {
         display: grid;
@@ -25,7 +26,7 @@
   </head>
   <body>
     <script>
-      const sketches = [s04, s03, s02, s01].map((sketchMaker) => {
+      const sketches = [s05].map((sketchMaker) => {
         const s = new p5(sketchMaker(800))
         return s
       })
