@@ -4,6 +4,7 @@ const s03 = (canvasSide) => (s) => {
     s.angleMode(s.DEGREES)
   }
 
+  const f = canvasSide / 800
   const offsetX = -canvasSide / 2
   const offsetY = -canvasSide
 
@@ -46,7 +47,7 @@ const s03 = (canvasSide) => (s) => {
   function drawStar(x, y, len) {
     // big lines
     s.stroke(colors.star)
-    s.strokeWeight((2 * canvasSide) / 800)
+    s.strokeWeight(2 * f)
     for (const angle of [30, 90, 150, 210, 270, 330]) {
       const dx = len * s.cos(angle)
       const dy = len * s.sin(angle)
@@ -64,7 +65,7 @@ const s03 = (canvasSide) => (s) => {
       const dy = len * s.sin(angle)
       // small lines
       s.stroke(colors.star)
-      s.strokeWeight(canvasSide / 800)
+      s.strokeWeight(f)
       s.line(
         x - lengths.small * dx,
         y - lengths.small * dy,
@@ -74,7 +75,7 @@ const s03 = (canvasSide) => (s) => {
 
       // extra lines
       s.stroke(colors.triangle)
-      s.strokeWeight(canvasSide / 800)
+      s.strokeWeight(f)
       s.line(
         x + lengths.extra0 * dx,
         y + lengths.extra0 * dy,

@@ -3,9 +3,10 @@ const s01 = (canvasSide) => (s) => {
     s.createCanvas(canvasSide, canvasSide)
   }
 
+  const f = canvasSide / 800
   const side = Math.floor((canvasSide * 0.8) / 6.2)
-  const offsetX = (-13 * canvasSide) / 800
-  const offsetY = (14 * canvasSide) / 800
+  const offsetX = -13 * f
+  const offsetY = 14 * f
 
   // https://coolors.co/a40e4c-2c2c54-acc3a6-f5d6ba-f49d6e
   const colors = {
@@ -37,7 +38,7 @@ const s01 = (canvasSide) => (s) => {
     const right = left + side
     const midX = left + side / 2
     const midY = top + side / 2
-    s.strokeWeight(canvasSide / 800)
+    s.strokeWeight(f)
     if (vertical) {
       s.fill(colors.half)
       s.triangle(left, top, right, top, midX, midY)

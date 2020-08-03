@@ -4,6 +4,8 @@ const sXX = (canvasSide) => (s) => {
     s.angleMode(s.DEGREES)
   }
 
+  const f = canvasSide / 800
+
   const offsetX = 0
   const offsetY = 0
 
@@ -14,6 +16,7 @@ const sXX = (canvasSide) => (s) => {
   const colors = {}
 
   s.draw = () => {
+    s.strokeWeight(f)
     drawBorder(s, true)
     s.noLoop()
   }

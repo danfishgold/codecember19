@@ -4,7 +4,8 @@ const s02 = (canvasSide) => (s) => {
     s.angleMode(s.DEGREES)
   }
 
-  const offsetX = -200 * (canvasSide / 800)
+  const f = canvasSide / 800
+  const offsetX = -200 * f
   const offsetY = 0
 
   // https://coolors.co/22162b-451f55-724e91-e54f6d-f8c630
@@ -17,7 +18,7 @@ const s02 = (canvasSide) => (s) => {
 
   s.draw = () => {
     s.background(colors.background)
-    const ht = 98 * (canvasSide / 800)
+    const ht = 98 * f
     const wd = (ht * 3) / 4
     const dx1 = (wd * s.sqrt(3)) / 2 + (ht * s.sqrt(3)) / 2
     const dy1 = ht / 2 - wd / 2
@@ -57,7 +58,7 @@ const s02 = (canvasSide) => (s) => {
     const dy1 = wd * s.cos(angle + 60)
     const dx2 = ht * s.sin(angle)
     const dy2 = ht * s.cos(angle)
-    s.strokeWeight(canvasSide / 800)
+    s.strokeWeight(f)
     s.quad(
       x,
       y,

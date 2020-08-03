@@ -3,7 +3,8 @@ const s04 = (canvasSide) => (s) => {
     s.createCanvas(canvasSide, canvasSide)
   }
 
-  const l = (38 * canvasSide) / 800
+  const f = canvasSide / 800
+  const l = 38 * f
   const offsetX = -1.5 * l
   const offsetY = 4 * l
 
@@ -15,7 +16,7 @@ const s04 = (canvasSide) => (s) => {
   }
 
   s.draw = () => {
-    s.strokeWeight(canvasSide / 800)
+    s.strokeWeight(f)
     s.background(colors.centers)
     const n = Math.ceil(canvasSide / l / 4)
     for (const i in range(n)) {
