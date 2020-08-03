@@ -57,8 +57,6 @@ const s05 = (canvasSide) => (s) => {
     s.beginShape()
     s.vertex(x, y)
     s.vertex(x + n * v1.x, y + n * v1.y)
-    s.vertex(x + n * v1.x - (l * v1.y) / 2, y + n * v1.y + (l * v1.x) / 2)
-    s.vertex(x + n * v2.x + (l * v2.y) / 2, y + n * v2.y - (l * v2.x) / 2)
     s.vertex(x + n * v2.x, y + n * v2.y)
     s.endShape(s.CLOSE)
   }
