@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="/lib/p5.1.1.9.js"></script>
+    <script src="/lib/p5.1.1.9.min.js"></script>
     <script src="utils.js"></script>
     <script src="sketch01.js"></script>
     <script src="sketch02.js"></script>
@@ -14,6 +14,37 @@
     <script src="sketch06.js"></script>
     <script src="sketch07.js"></script>
     <style>
+      body {
+        display: grid;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 3rem;
+        padding: 10px;
+      }
+
+      .description {
+        padding: 10px;
+      }
+
+      p {
+        line-height: 1.4;
+      }
+
+      footer {
+        text-align: center;
+        margin: 10px;
+      }
+
+      a {
+        color: black;
+      }
+
       main {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -28,12 +59,41 @@
   </head>
   <body>
     <script>
-      const sketches = [s07, s06, s05, s04, s03, s02, s01].map(
+      const sketches = [s01, s02, s03, s04, s05, s06, s07].map(
         (sketchMaker) => {
           const s = new p5(sketchMaker(800))
           return s
         },
       )
     </script>
+    <h1>Codecember 2019: Patterns</h1>
+    <div class="description">
+      <p>
+        <strong
+          >I cannot emphasize enough how much progress this work is in.</strong
+        >
+      </p>
+      <p>
+        This project is <em>heavily</em> inspired by a Japanese book from 1824
+        called “Book of New Patterns” (新形小紋帳). It has a bunch of cool
+        patterns. I found out about it through
+        <a href="https://twitter.com/presentcorrect/status/1251108539420028928"
+          >a tweet by a stationary store in London</a
+        >(???). Anyway, it's cool and
+        <a
+          href="https://www2.dhii.jp/nijl_opendata/searchlist.php?md=thumbs&bib=200014700"
+          >available online</a
+        >. Apparently The British Museum has
+        <a
+          href="https://www.britishmuseum.org/collection/object/A_1973-0723-0-57"
+          >a copy</a
+        >. I would like to see this copy. And visit said store, which has a very
+        active twitter account.
+      </p>
+    </div>
+    <main></main>
+    <footer>
+      Made with ♥︎ by <a href="https://danfishgold.com">Dan Fishgold</a>
+    </footer>
   </body>
 </html>
