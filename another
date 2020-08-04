@@ -1,0 +1,45 @@
+#!/usr/local/bin/python3
+
+import os
+from os import path
+import re
+
+def filename(n):
+    return f'sketch{n:02d}.js'
+
+def index_of_last_line_matching(pattern, lines):
+    index = None
+    line = None
+    for (idx, ln) in enumerate(lines):
+        if re.search(pattern, ln):
+            index = idx
+            line = ln
+    return index, line
+
+# find the latest n
+n = 1
+while path.isfile(filename(n)):
+    n += 1
+
+# copy sketchXX
+with open('sketchXX.js', 'r') as f:
+    lines = f.readlines()
+
+lines[0] = lines[0].replace('sXX', f's{n:02d}')
+with open(filename(n), 'w') as f:
+    f.write(''.join(lines))
+
+print(f'Created {filename(n)}')
+
+# Add an import to the new script file
+with open('index.html', 'r') as f:
+    lines = f.readlines()
+
+last_import_index, last_import = index_of_last_line_matching(r'<script src="sketch\d+\.js"></script>', lines)
+new_import = re.sub(r'sketch\d+\.js', filename(n), last_import)
+lines.insert(last_import_index+1, new_import)
+
+with open('index.html', 'w') as f:
+    f.write(''.join(lines))
+
+print(f'Imported it in index.html')
