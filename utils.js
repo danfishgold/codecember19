@@ -62,6 +62,11 @@ function shufflePalette(coolorsUrl) {
   return shuffle(colors)
 }
 
+function fillingHexagonalGrid(canvasSide, l, angle) {
+  r = Math.ceil(canvasSide / l / 2)
+  return hexagonalGrid(canvasSide / 2, canvasSide / 2, l, r, angle)
+}
+
 function* hexagonalGrid(x, y, l, r, angle) {
   angle = angle * (Math.PI / 180)
   const x1 = l * Math.cos(angle)
@@ -72,6 +77,7 @@ function* hexagonalGrid(x, y, l, r, angle) {
     yield [x + i * x1 + j * x2, y + i * y1 + j * y2, i, j, n, rr]
   }
 }
+
 function* hexagonalGridIndexes(r) {
   for (const rr of range(r + 1)) {
     for (const [i, j, n] of hexagonalGridRingIndexes(rr)) {
@@ -79,6 +85,7 @@ function* hexagonalGridIndexes(r) {
     }
   }
 }
+
 function* hexagonalGridRingIndexes(r) {
   if (r === 0) {
     yield [0, 0, 0]

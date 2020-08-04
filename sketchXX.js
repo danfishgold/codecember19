@@ -17,7 +17,8 @@ const sXX = (canvasSide) => (s) => {
 
   s.draw = () => {
     s.strokeWeight(f)
-    drawBorder(s, true)
+
+    drawBorder(s, 'black')
     s.noLoop()
   }
 }

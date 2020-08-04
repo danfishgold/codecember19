@@ -12,6 +12,7 @@
     <script src="sketch04.js"></script>
     <script src="sketch05.js"></script>
     <script src="sketch06.js"></script>
+    <script src="sketch07.js"></script>
     <style>
       main {
         display: grid;
@@ -27,10 +28,12 @@
   </head>
   <body>
     <script>
-      const sketches = [s06, s05, s04, s03, s02, s01].map((sketchMaker) => {
-        const s = new p5(sketchMaker(800))
-        return s
-      })
+      const sketches = [s07, s06, s05, s04, s03, s02, s01].map(
+        (sketchMaker) => {
+          const s = new p5(sketchMaker(800))
+          return s
+        },
+      )
     </script>
   </body>
 </html>
