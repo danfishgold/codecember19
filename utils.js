@@ -109,3 +109,12 @@ function* hexagonalGridRingIndexes(r) {
     yield [-r + i, i, 5 * r + i]
   }
 }
+
+function mod(k, n) {
+  const m = k % n
+  if (m >= 0) {
+    return m
+  } else {
+    return 3 + m
+  }
+}
