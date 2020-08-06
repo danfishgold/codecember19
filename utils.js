@@ -62,6 +62,17 @@ function shufflePalette(coolorsUrl) {
   return shuffle(colors)
 }
 
+function mod(k, n) {
+  const m = k % n
+  if (m >= 0) {
+    return m
+  } else {
+    return 3 + m
+  }
+}
+
+// HEXAGONAL GRIDS
+
 function fillingHexagonalGrid(canvasSide, l, angle) {
   r = Math.ceil(canvasSide / l / 2)
   return hexagonalGrid(canvasSide / 2, canvasSide / 2, l, r, angle)
@@ -110,11 +121,32 @@ function* hexagonalGridRingIndexes(r) {
   }
 }
 
-function mod(k, n) {
-  const m = k % n
-  if (m >= 0) {
-    return m
-  } else {
-    return 3 + m
+// PARALLELOGRAM GRID
+
+function parallelogramCoefficients(x, y, v1, v2) {
+  const det = v1.x * v2.y - v2.x * v1.y
+  const n = (1 / det) * (v2.y * x - v2.x * y)
+  const m = (1 / det) * (-v1.y * x + v1.x * y)
+  return [n, m]
+}
+
+function* parallelogramGrid(canvasSide, v1, v2) {
+  const d = canvasSide / 2
+  const [n1, m1] = parallelogramCoefficients(-d, -d, v1, v2)
+  const [n2, m2] = parallelogramCoefficients(-d, d, v1, v2)
+  const [n3, m3] = parallelogramCoefficients(d, -d, v1, v2)
+  const [n4, m4] = parallelogramCoefficients(d, d, v1, v2)
+
+  const minN = Math.floor(Math.min(n1, n2, n3, n4))
+  const maxN = Math.ceil(Math.max(n1, n2, n3, n4))
+  const minM = Math.floor(Math.min(m1, m2, m3, m4))
+  const maxM = Math.ceil(Math.max(m1, m2, m3, m4))
+
+  for (const i of range(minN, maxN + 1)) {
+    for (const j of range(minM, maxM + 1)) {
+      const x = d + i * v1.x + j * v2.x
+      const y = d + i * v1.y + j * v2.y
+      yield [x, y, i, j]
+    }
   }
 }
