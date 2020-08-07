@@ -4,9 +4,6 @@ const s10 = (canvasSide) => (s) => {
     s.angleMode(s.DEGREES)
   }
 
-  const { add, mult } = p5.Vector
-  const minus = (v) => mult(v, -1)
-
   const f = canvasSide / 800
   const edge = 30 * f
 

@@ -16,6 +16,7 @@
     <script src="sketch08.js"></script>
     <script src="sketch09.js"></script>
     <script src="sketch10.js"></script>
+    <script src="sketch11.js"></script>
     <style>
       body {
         display: grid;
@@ -64,12 +65,27 @@
   </head>
   <body>
     <script>
-      const sketches = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s10].map(
-        (sketchMaker) => {
+      const sketches = [
+        s01,
+        s02,
+        s03,
+        s04,
+        s05,
+        s06,
+        s07,
+        s08,
+        s09,
+        s10,
+        s11(1),
+        s11(2),
+        s11(3),
+        s11(4),
+      ]
+        // .slice(-4)
+        .map((sketchMaker) => {
           const s = new p5(sketchMaker(800))
           return s
-        },
-      )
+        })
     </script>
     <h1>Codecember 2019: Patterns</h1>
     <div class="description">

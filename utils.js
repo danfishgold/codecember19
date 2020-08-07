@@ -31,7 +31,7 @@ function range(n, m) {
   }
 }
 
-function drawBorder(sketch, strokeColor) {
+function drawBorder(sketch, strokeColor, strokeWeight) {
   sketch.stroke('white')
   const canvasSide = Math.min(sketch.width, sketch.height)
   sketch.strokeWeight(canvasSide * 0.7)
@@ -42,16 +42,14 @@ function drawBorder(sketch, strokeColor) {
     canvasSide * 1.5,
     canvasSide * 1.5,
   )
-  if (strokeColor) {
-    sketch.stroke(strokeColor)
-    sketch.strokeWeight(canvasSide / 800)
-    sketch.ellipse(
-      canvasSide / 2,
-      canvasSide / 2,
-      canvasSide * 0.8,
-      canvasSide * 0.8,
-    )
-  }
+  sketch.stroke(strokeColor || 'black')
+  sketch.strokeWeight(strokeWeight || canvasSide / 800)
+  sketch.ellipse(
+    canvasSide / 2,
+    canvasSide / 2,
+    canvasSide * 0.8,
+    canvasSide * 0.8,
+  )
 }
 
 function shufflePalette(coolorsUrl) {
@@ -67,9 +65,14 @@ function mod(k, n) {
   if (m >= 0) {
     return m
   } else {
-    return 3 + m
+    return n + m
   }
 }
+
+const { add, mult } = p5.Vector
+const minus = (v) => mult(v, -1)
+const X = new p5.Vector(1, 0)
+const Y = new p5.Vector(0, 1)
 
 // HEXAGONAL GRIDS
 
