@@ -39,6 +39,10 @@ last_import_index, last_import = index_of_last_line_matching(r'<script src="sket
 new_import = re.sub(r'sketch\d+\.js', filename(n), last_import)
 lines.insert(last_import_index+1, new_import)
 
+last_pattern_index, last_pattern = index_of_last_line_matching(r' {8}s\d+,', lines)
+new_pattern = ' ' * 8 + f's{n:02},\n'
+lines.insert(last_pattern_index+1, new_pattern)
+
 with open('index.html', 'w') as f:
     f.write(''.join(lines))
 
