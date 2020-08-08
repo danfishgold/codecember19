@@ -1,4 +1,4 @@
-const s11 = (canvasSide) => (s) => {
+const s12 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
     s.angleMode(s.DEGREES)
@@ -8,7 +8,7 @@ const s11 = (canvasSide) => (s) => {
   const side = 130 * f
 
   const crossWidth = side / 3
-  const shadowWidth = side * (2 / 3)
+  const shadowWidth = side * (1 / 3)
   const crossHeight = side / 2 - crossWidth / 2
 
   function vectorAt(x, y, mx, my) {
@@ -33,12 +33,12 @@ const s11 = (canvasSide) => (s) => {
     s.endShape(s.CLOSE)
   }
 
-  // https://coolors.co/355070-6d597a-b56576-e56b6f-eaac8b
+  // https://coolors.co/efecca-a9cbb7-ff934f-5e565a
   const colors = {
-    background: '#b56576',
-    crosses: ['#e56b6f', '#eaac8b'],
-    shadow: '#6d597a',
-    stroke: '#355070',
+    background: '#5e565a',
+    crosses: ['#a9cbb7', '#efecca'],
+    shadow: '#ff934f',
+    stroke: 'black',
   }
 
   s.draw = () => {

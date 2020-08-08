@@ -17,6 +17,7 @@
     <script src="sketch09.js"></script>
     <script src="sketch10.js"></script>
     <script src="sketch11.js"></script>
+    <script src="sketch12.js"></script>
     <style>
       body {
         display: grid;
@@ -76,12 +77,10 @@
         s08,
         s09,
         s10,
-        s11(1),
-        s11(2),
-        s11(3),
-        s11(4),
+        s11,
+        s12,
       ]
-        // .slice(-4)
+        // .slice(-1)
         .map((sketchMaker) => {
           const s = new p5(sketchMaker(800))
           return s
