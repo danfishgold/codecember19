@@ -32,7 +32,7 @@ const s09 = (canvasSide) => (s) => {
       drawFlower(x, y, 0)
     }
 
-    drawBorder(s, colors.strokes)
+    drawBorder(s, colors.strokes, 2 * f)
     s.noLoop()
   }
 

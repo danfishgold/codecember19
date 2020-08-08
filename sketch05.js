@@ -31,7 +31,7 @@ const s05 = (canvasSide) => (s) => {
       megaHexagon(x, y, (i + j) % 3)
     }
 
-    drawBorder(s, 'black')
+    drawBorder(s, 'black', 2 * f)
     s.noLoop()
   }
 
@@ -53,10 +53,10 @@ const s05 = (canvasSide) => (s) => {
   }
 
   function hexagonPiece(x, y, angle) {
-    const v = s.createVector(1, 0).rotate(angle)
+    const v0 = s.createVector(1, 0).rotate(angle)
+    const v1 = v0.copy().rotate(-60)
+    const v2 = v0.copy().rotate(60)
 
-    const v1 = v.copy().rotate(-60)
-    const v2 = v.copy().rotate(60)
     s.beginShape()
     s.vertex(x, y)
     s.vertex(x + n * v1.x, y + n * v1.y)

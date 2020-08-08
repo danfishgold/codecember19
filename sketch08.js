@@ -5,7 +5,7 @@ const s08 = (canvasSide) => (s) => {
   }
 
   const f = canvasSide / 800
-  const edge = 100
+  const edge = 100 * f
 
   //https://coolors.co/c6d8ff-71a9f7-16425b-b3b492-3b0d11
   const colors = ['#71a9f7', '#c6d8ff', '#72195a']

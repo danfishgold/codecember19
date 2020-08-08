@@ -41,9 +41,10 @@ const s07 = (canvasSide) => (s) => {
   }
 
   function drawThing(x, y, angle) {
-    const v = s.createVector(edge, 0).rotate(angle)
-    const v1 = v.copy().rotate(-30)
-    const v2 = v.copy().rotate(-90)
+    const v0 = s.createVector(edge, 0).rotate(angle)
+    const v1 = v0.copy().rotate(-30)
+    const v2 = v0.copy().rotate(-90)
+    const { vertexAt } = v(s, v1, v2)
 
     const multipliers = [
       [0, 0],
@@ -64,7 +65,7 @@ const s07 = (canvasSide) => (s) => {
     ]
     s.beginShape()
     for (const [k, l] of multipliers) {
-      s.vertex(x + v1.x * k + v2.x * l, y + v1.y * k + v2.y * l)
+      vertexAt(x, y, k, l)
     }
     s.endShape(s.CLOSE)
   }

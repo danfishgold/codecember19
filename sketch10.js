@@ -10,6 +10,8 @@ const s10 = (canvasSide) => (s) => {
   const v1 = s.createVector(edge, 0).rotate(65 * (s.PI / 180))
   const v2 = s.createVector(edge, 0).rotate(-50 * (s.PI / 180))
 
+  const { minus, xy, vertexAt } = v(s, v1, v2)
+
   // https://coolors.co/ed254e-f9dc5c-f4fffd-011936-465362
   const colors = {
     background: '#f4fffd',
@@ -21,11 +23,7 @@ const s10 = (canvasSide) => (s) => {
     s.strokeWeight(5 * f)
     s.strokeCap(s.PROJECT)
 
-    for ([x, y, i, j] of parallelogramGrid(
-      canvasSide,
-      add(mult(v1, 3), mult(v2, 5)),
-      add(mult(v1, -5), mult(v2, 3)),
-    )) {
+    for ([x, y, i, j] of parallelogramGrid(canvasSide, xy(3, 5), xy(-5, 3))) {
       s.noFill()
       s.stroke(colors.lines[0])
       drawShape(x, y, 0)
@@ -37,7 +35,7 @@ const s10 = (canvasSide) => (s) => {
       drawShape(x, y, 3)
     }
 
-    drawBorder(s, colors.lines[3])
+    drawBorder(s, colors.lines[3], 5 * f)
     s.noLoop()
   }
 
@@ -76,7 +74,7 @@ const s10 = (canvasSide) => (s) => {
     ]
     s.beginShape()
     for (const [i, j] of coefs) {
-      s.vertex(x + i * v.x + j * u.x, y + i * v.y + j * u.y)
+      vertexAt(x, y, i, j, v, u)
     }
     s.endShape()
   }

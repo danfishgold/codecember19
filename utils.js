@@ -69,10 +69,40 @@ function mod(k, n) {
   }
 }
 
-const { add, mult } = p5.Vector
-const minus = (v) => mult(v, -1)
-const X = new p5.Vector(1, 0)
-const Y = new p5.Vector(0, 1)
+const v = (s, X, Y) => {
+  const add = p5.Vector.add
+  const mult = p5.Vector.mult
+  const minus = (v) => mult(v, -1)
+  X = X || new p5.Vector(1, 0)
+  Y = Y || new p5.Vector(0, 1)
+
+  const xy = (mx, my, vx, vy) => {
+    vx = vx || X
+    vy = vy || Y
+    return p5.Vector.add(p5.Vector.mult(vx, mx), p5.Vector.mult(vy, my))
+  }
+
+  const vectorAt = (x, y, mx, my, vx, vy) => {
+    const delta = xy(mx, my, vx, vy)
+    return new p5.Vector(x + delta.x, y + delta.y)
+  }
+
+  const vertexAt = (x, y, mx, my, vx, vy) => {
+    const vec = vectorAt(x, y, mx, my, vx, vy)
+    s.vertex(vec.x, vec.y)
+  }
+
+  const rectAt = (x, y, mx, my, wd, ht, vx, vy) => {
+    s.beginShape()
+    vertexAt(x, y, mx, my, vx, vy)
+    vertexAt(x, y, mx + wd, my, vx, vy)
+    vertexAt(x, y, mx + wd, my + ht, vx, vy)
+    vertexAt(x, y, mx, my + ht, vx, vy)
+    s.endShape(s.CLOSE)
+  }
+
+  return { add, mult, X, Y, xy, minus, vectorAt, vertexAt, rectAt }
+}
 
 // HEXAGONAL GRIDS
 

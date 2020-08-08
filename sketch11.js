@@ -11,28 +11,6 @@ const s11 = (canvasSide) => (s) => {
   const shadowWidth = side * (2 / 3)
   const crossHeight = side / 2 - crossWidth / 2
 
-  function vectorAt(x, y, mx, my) {
-    const delta = add(
-      mult(X.copy().rotate(45 * (s.PI / 180)), mx),
-      mult(Y.copy().rotate(45 * (s.PI / 180)), my),
-    )
-    return s.createVector(x + delta.x, y + delta.y)
-  }
-
-  function vertexAt(x, y, mx, my) {
-    const vec = vectorAt(x, y, mx, my)
-    s.vertex(vec.x, vec.y)
-  }
-
-  function rectAt(x, y, mx, my, wd, ht) {
-    s.beginShape()
-    vertexAt(x, y, mx, my)
-    vertexAt(x, y, mx + wd, my)
-    vertexAt(x, y, mx + wd, my + ht)
-    vertexAt(x, y, mx, my + ht)
-    s.endShape(s.CLOSE)
-  }
-
   // https://coolors.co/355070-6d597a-b56576-e56b6f-eaac8b
   const colors = {
     background: '#b56576',
@@ -41,11 +19,15 @@ const s11 = (canvasSide) => (s) => {
     stroke: '#355070',
   }
 
+  const X = new p5.Vector(1, 0).rotate(s.PI / 4)
+  const Y = new p5.Vector(0, 1).rotate(s.PI / 4)
+  const { xy, vertexAt, rectAt } = v(s, X, Y)
+
   s.draw = () => {
     s.strokeWeight(4 * f)
     s.stroke(colors.stroke)
     s.background(colors.background)
-    const v = vectorAt(0, 0, crossWidth + shadowWidth, crossWidth + crossHeight)
+    const v = xy(crossWidth + shadowWidth, crossWidth + crossHeight)
     const u = s.createVector(v.y, -v.x)
 
     for (const [x, y, i, j] of parallelogramGrid(canvasSide, v, u)) {

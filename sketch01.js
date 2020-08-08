@@ -5,8 +5,8 @@ const s01 = (canvasSide) => (s) => {
 
   const f = canvasSide / 800
   const side = Math.floor((canvasSide * 0.8) / 6.2)
-  const offsetX = -13 * f
-  const offsetY = 14 * f
+
+  const { xy, mult, X, Y } = v(s)
 
   // https://coolors.co/a40e4c-2c2c54-acc3a6-f5d6ba-f49d6e
   const colors = {
@@ -16,24 +16,19 @@ const s01 = (canvasSide) => (s) => {
     innerQuarter2: '#acc3a6',
   }
 
-  // const colors = {
-  //   half: 'white',
-  //   outerQuarters: 'white',
-  //   innerQuarter1: 'white',
-  //   innerQuarter2: 'white',
-  // }
-
   s.draw = () => {
-    for (const x of range(Math.ceil(canvasSide / side) + 1)) {
-      for (const y of range(Math.ceil(canvasSide / side) + 1)) {
-        drawTriangle(offsetX + side * x, offsetY + side * y, (x + y) % 2)
-      }
+    for (const [x, y] of parallelogramGrid(
+      canvasSide,
+      mult(X, side),
+      mult(Y, side),
+    )) {
+      drawSquare(x, y, (x + y) % 2)
     }
     drawBorder(s, 'black')
     s.noLoop()
   }
 
-  function drawTriangle(left, top, vertical) {
+  function drawSquare(left, top, vertical) {
     const bottom = top + side
     const right = left + side
     const midX = left + side / 2
