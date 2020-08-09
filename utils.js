@@ -74,7 +74,7 @@ const v = (s, X, Y) => {
   const mult = p5.Vector.mult
   const minus = (v) => mult(v, -1)
   X = X || new p5.Vector(1, 0)
-  Y = Y || new p5.Vector(0, 1)
+  Y = Y || new p5.Vector(-X.y, X.x)
 
   const xy = (mx, my, vx, vy) => {
     vx = vx || X
@@ -87,9 +87,25 @@ const v = (s, X, Y) => {
     return new p5.Vector(x + delta.x, y + delta.y)
   }
 
+  const arrayAt = (x, y, mx, my, vx, vy) =>
+    vectorAt(x, y, mx, my, vx, vy).array().slice(0, 2)
+
   const vertexAt = (x, y, mx, my, vx, vy) => {
     const vec = vectorAt(x, y, mx, my, vx, vy)
     s.vertex(vec.x, vec.y)
+  }
+
+  const bezierVertexAt = (x, y, c1mx, c1my, c2mx, c2my, amx, amy, vx, vy) => {
+    const [c1x, c1y] = arrayAt(x, y, c1mx, c1my, vx, vy)
+    const [c2x, c2y] = arrayAt(x, y, c2mx, c2my, vx, vy)
+    const [ax, ay] = arrayAt(x, y, amx, amy, vx, vy)
+    s.bezierVertex(c1x, c1y, c2x, c2y, ax, ay)
+  }
+
+  const quadraticVertexAt = (x, y, cmx, cmy, amx, amy, vx, vy) => {
+    const [cx, cy] = arrayAt(x, y, cmx, cmy, vx, vy)
+    const [ax, ay] = arrayAt(x, y, amx, amy, vx, vy)
+    s.quadraticVertex(cx, cy, ax, ay)
   }
 
   const rectAt = (x, y, mx, my, wd, ht, vx, vy) => {
@@ -101,7 +117,20 @@ const v = (s, X, Y) => {
     s.endShape(s.CLOSE)
   }
 
-  return { add, mult, X, Y, xy, minus, vectorAt, vertexAt, rectAt }
+  return {
+    add,
+    mult,
+    X,
+    Y,
+    xy,
+    minus,
+    vectorAt,
+    arrayAt,
+    vertexAt,
+    bezierVertexAt,
+    quadraticVertexAt,
+    rectAt,
+  }
 }
 
 // HEXAGONAL GRIDS
@@ -109,6 +138,10 @@ const v = (s, X, Y) => {
 function fillingHexagonalGrid(canvasSide, l, angle) {
   r = Math.ceil(canvasSide / l / 2)
   return hexagonalGrid(canvasSide / 2, canvasSide / 2, l, r, angle)
+}
+
+function* justTheMiddle(canvasSide) {
+  yield [canvasSide / 2, canvasSide / 2]
 }
 
 function* hexagonalGrid(x, y, l, r, angle) {
