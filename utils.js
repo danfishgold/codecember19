@@ -43,7 +43,9 @@ function drawBorder(sketch, strokeColor, strokeWeight) {
     canvasSide * 1.5,
   )
   sketch.stroke(strokeColor || 'black')
-  sketch.strokeWeight(strokeWeight || canvasSide / 800)
+  sketch.strokeWeight(
+    strokeWeight === undefined ? canvasSide / 800 : strokeWeight,
+  )
   sketch.ellipse(
     canvasSide / 2,
     canvasSide / 2,
@@ -197,6 +199,7 @@ function parallelogramCoefficients(x, y, v1, v2) {
 }
 
 function* parallelogramGrid(canvasSide, v1, v2) {
+  v2 = v2 || v1.copy().rotate(90)
   const d = canvasSide / 2
   const [n1, m1] = parallelogramCoefficients(-d, -d, v1, v2)
   const [n2, m2] = parallelogramCoefficients(-d, d, v1, v2)
