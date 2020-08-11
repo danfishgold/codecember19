@@ -135,6 +135,46 @@ const v = (s, X, Y) => {
   }
 }
 
+const vHex = (s, r, angle1, angle2) => {
+  const add = p5.Vector.add
+  const mult = p5.Vector.mult
+  const minus = (v) => mult(v, -1)
+  angle2 = angle2 || angle1 + 60
+  A = new p5.Vector(r, 0).rotate(angle1 * (s.PI / 180))
+  B = new p5.Vector(r, 0).rotate(angle2 * (s.PI / 180))
+  C = add(B, minus(A))
+
+  const abc = (ma, mb, mc) => {
+    return p5.Vector.add(p5.Vector.mult(A, ma - mc), p5.Vector.mult(B, mb + mc))
+  }
+
+  const vectorAt = (x, y, ma, mb, mc) => {
+    const delta = abc(ma, mb, mc)
+    return new p5.Vector(x + delta.x, y + delta.y)
+  }
+
+  const arrayAt = (x, y, ma, mb, mc) =>
+    vectorAt(x, y, ma, mb, mc).array().slice(0, 2)
+
+  const vertexAt = (x, y, ma, mb, mc) => {
+    const vec = vectorAt(x, y, ma, mb, mc)
+    s.vertex(vec.x, vec.y)
+  }
+
+  return {
+    add,
+    mult,
+    minus,
+    A,
+    B,
+    C,
+    abc,
+    vectorAt,
+    arrayAt,
+    vertexAt,
+  }
+}
+
 // HEXAGONAL GRIDS
 
 function fillingHexagonalGrid(canvasSide, l, angle) {
