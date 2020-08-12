@@ -6,11 +6,31 @@ const s19 = (canvasSide) => (s) => {
 
   const f = canvasSide / 800
   const ht = 120 * f
-  const dx = 70 * f
-  const h = 30 * f
-  const u = 25 * f
-  const t1 = 0.3
-  const t2 = 0.94
+  const dx = 0.65 * ht
+  const h = 0.25 * ht
+  const u = 0.25 * ht
+
+  // I did something similar to this here:
+  // https://math.stackexchange.com/a/1777007
+  // to find the intersection of the bezier from p0 = (x, y) and the one
+  // from p0' = (p0.x, p0.y+ht) with p1' = -p1 and p2' = -p2
+  const dp1x = u - dx
+  const dp1y = ht / 2
+  const dp2x = u
+  const dp2y = ht / 2
+
+  const ax = dp2x - 2 * dp1x
+  const ay = dp2y - 2 * dp1y
+  const bx = 2 * dp1x
+  const by = 2 * dp1y
+  const dy = ht - h
+
+  const m = (dy * ax) / (by * ax - bx * ay)
+
+  const disc = m * m - ((2 * m) / ax) * (m * ax + bx)
+  const t1 = m / 2 - s.sqrt(disc) / 2
+  const t2 = m / 2 + s.sqrt(disc) / 2
+
   const { xy, vertexAt, quadraticVertexAt } = v(s)
   const { before, between, after } = splitBezierInThree(
     xy(0, 0),
