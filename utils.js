@@ -175,6 +175,36 @@ const vHex = (s, r, angle1, angle2) => {
   }
 }
 
+function splitBezier(p0, p1, p2, t) {
+  const q1 = p5.Vector.lerp(p0, p1, t)
+  const q2 = p5.Vector.lerp(p1, p2, t)
+  const r1 = p5.Vector.lerp(q1, q2, t)
+
+  return {
+    before: {
+      p0: p0,
+      p1: q1,
+      p2: r1,
+    },
+    after: {
+      p0: r1,
+      p1: q2,
+      p2: p2,
+    },
+  }
+}
+
+function splitBezierInThree(p0, p1, p2, t1, t2) {
+  const splitAt2 = splitBezier(p0, p1, p2, t2)
+  const before2 = splitAt2.before
+  const splitAgain = splitBezier(before2.p0, before2.p1, before2.p2, t1 / t2)
+  return {
+    before: splitAgain.before,
+    between: splitAgain.after,
+    after: splitAt2.after,
+  }
+}
+
 // HEXAGONAL GRIDS
 
 function fillingHexagonalGrid(canvasSide, l, angle) {
