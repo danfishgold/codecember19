@@ -8,7 +8,8 @@ const s13 = (canvasSide) => (s) => {
   const len = f * 80
 
   // https://coolors.co/00243d-1a7a89-ffe6c2-ff9633-78290f
-  const colors = { background: '#00243D', strokes: '#1A7A89' }
+  // but also with brightness + 15, saturation - 15
+  const colors = { background: '#0A4976', strokes: '#2D99AA' }
 
   s.draw = () => {
     s.background(colors.background)
