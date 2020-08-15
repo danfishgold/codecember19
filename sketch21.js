@@ -28,7 +28,6 @@ const s21 = (canvasSide) => (s) => {
     background: '#ebd494',
     asterisks: ['#9ad2cb', '#d7ebba', '#feffbe'],
   }
-  console.log(colors)
 
   s.draw = () => {
     s.background(colors.background)
