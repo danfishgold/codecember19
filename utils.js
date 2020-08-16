@@ -42,16 +42,18 @@ function drawBorder(sketch, strokeColor, strokeWeight) {
     canvasSide * 1.5,
     canvasSide * 1.5,
   )
-  sketch.stroke(strokeColor || 'black')
-  sketch.strokeWeight(
-    strokeWeight === undefined ? canvasSide / 800 : strokeWeight,
-  )
-  sketch.ellipse(
-    canvasSide / 2,
-    canvasSide / 2,
-    canvasSide * 0.8,
-    canvasSide * 0.8,
-  )
+  if (strokeColor !== null) {
+    sketch.stroke(strokeColor || 'black')
+    sketch.strokeWeight(
+      strokeWeight === undefined ? canvasSide / 800 : strokeWeight,
+    )
+    sketch.ellipse(
+      canvasSide / 2,
+      canvasSide / 2,
+      canvasSide * 0.8,
+      canvasSide * 0.8,
+    )
+  }
 }
 
 function shufflePalette(coolorsUrl) {
