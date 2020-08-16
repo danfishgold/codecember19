@@ -33,7 +33,7 @@ const s21 = (canvasSide) => (s) => {
     s.background(colors.background)
     s.stroke(colors.strokes)
     s.strokeWeight(4 * f)
-    const v1 = s.createVector(edge2, edge1 + s.sqrt(3) * edge2)
+    const v1 = new Vector(edge2, edge1 + s.sqrt(3) * edge2)
     for (const [x, y, i, j] of fillingHexagonalGrid(
       canvasSide,
       v1.mag(),
@@ -52,8 +52,8 @@ const s21 = (canvasSide) => (s) => {
     for (index of range(6)) {
       const { vertexAt } = v(
         s,
-        s.createVector(1, 0).rotate(60 * index),
-        s.createVector(0, 1).rotate(60 * index),
+        new Vector(1, 0).rotate(60 * index),
+        new Vector(0, 1).rotate(60 * index),
       )
       const dx = -edge2 / 2
       const dy = -edge2 * (s.sqrt(3) / 2)

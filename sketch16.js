@@ -7,9 +7,9 @@ const s16 = (canvasSide) => (s) => {
   const f = canvasSide / 800
   const s2 = s.sqrt(2)
   const len = 22 * f
-  const side = 3 * s2 - 1 + s.sin(s.PI / 8)
+  const side = 3 * s2 - 1 + Math.sin(s.PI / 8)
   const a1 = side / s2 - 2 * s2 + 1
-  const { xy, rectAt } = v(s, s.createVector(len, 0))
+  const { xy, rectAt } = v(s, new Vector(len, 0))
 
   // https://coolors.co/cee0dc-b9cfd4-afaab9-b48291-a5243d
   const colors = { c1: '#b9cfd4', c2: '#a5243d', squares: '#b48291' }
@@ -57,7 +57,7 @@ const s16 = (canvasSide) => (s) => {
   ]
 
   function armVertices(x, y, dir) {
-    const { vertexAt } = v(s, s.createVector(len, 0).rotate(dir * 90))
+    const { vertexAt } = v(s, new Vector(len, 0).rotate(dir * 90))
     for (const [mx, my] of armCoefficients) {
       vertexAt(x, y, mx, my)
     }

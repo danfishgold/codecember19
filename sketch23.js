@@ -8,15 +8,11 @@ const s23 = (canvasSide) => (s) => {
   const edge = 20 * f
   const angle = 90
   const s2 = s.sqrt(2)
-  const boop1 = 5 - s2 + s.sin(22.5)
+  const boop1 = 5 - s2 + Math.sin(22.5)
   const boop2 = 3
   const boop3 = (2 + boop1 - boop2) / 2
-  const v0 = s.createVector(edge, 0)
-  const { X, Y, xy, minus } = v(
-    s,
-    v0.copy().rotate(angle * (s.PI / 180)),
-    v0.copy().rotate((angle - 90) * (s.PI / 180)),
-  )
+  const v0 = new Vector(edge, 0)
+  const { X, Y, xy, minus } = v(s, v0.rotate(angle), v0.rotate(angle - 90))
 
   // const palette = shufflePalette(
   //   'https://coolors.co/0d1f2d-546a7b-9ea3b0-fae1df-e4c3ad',

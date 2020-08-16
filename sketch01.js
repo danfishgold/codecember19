@@ -4,7 +4,7 @@ const s01 = (canvasSide) => (s) => {
   }
 
   const f = canvasSide / 800
-  const side = Math.floor((canvasSide * 0.8) / 6.2)
+  const side = 100 * f
 
   const { xy, mult, X, Y } = v(s)
 
@@ -17,12 +17,12 @@ const s01 = (canvasSide) => (s) => {
   }
 
   s.draw = () => {
-    for (const [x, y] of parallelogramGrid(
+    for (const [x, y, i, j] of parallelogramGrid(
       canvasSide,
       mult(X, side),
       mult(Y, side),
     )) {
-      drawSquare(x, y, (x + y) % 2)
+      drawSquare(x, y, (i + j) % 2)
     }
     drawBorder(s, 'black')
     s.noLoop()

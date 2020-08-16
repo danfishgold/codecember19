@@ -29,11 +29,11 @@ const s18 = (canvasSide) => (s) => {
 
     for (const [x, y, i, j] of parallelogramGrid(
       canvasSide,
-      s.createVector(
+      new Vector(
         (edge + edge / 2 - (3 * stroke) / 2) * s2,
         (edge - stroke) / s2,
       ),
-      s.createVector(0, s2 * (edge - stroke)),
+      new Vector(0, s2 * (edge - stroke)),
     )) {
       drawUnit(x, y, j)
     }
@@ -64,7 +64,7 @@ const s18 = (canvasSide) => (s) => {
     [(edge + smallEdge) / 2 + stroke, (edge - smallEdge) / 2 - stroke],
     [
       (edge + smallEdge) / 2 + stroke,
-      (edge + smallEdge) / 2 + stroke * s.sin(22.5),
+      (edge + smallEdge) / 2 + stroke * Math.sin(22.5),
     ],
     [edge - stroke, edge - stroke * (1 + s2)],
     [edge - stroke, stroke],

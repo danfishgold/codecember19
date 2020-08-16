@@ -41,9 +41,9 @@ const s07 = (canvasSide) => (s) => {
   }
 
   function drawThing(x, y, angle) {
-    const v0 = s.createVector(edge, 0).rotate(angle)
-    const v1 = v0.copy().rotate(-30)
-    const v2 = v0.copy().rotate(-90)
+    const v0 = new Vector(edge, 0).rotate(angle)
+    const v1 = v0.rotate(-30)
+    const v2 = v0.rotate(-90)
     const { vertexAt } = v(s, v1, v2)
 
     const multipliers = [

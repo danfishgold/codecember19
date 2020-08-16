@@ -7,10 +7,10 @@ const s15 = (canvasSide) => (s) => {
   const f = canvasSide / 800
   const { bezierVertexAt, vertexAt, xy } = v(s)
   const curveCount = 12
-  const minWidth = 20
-  const maxWidth = 60
-  const height = 200
-  const separatorPointCount = 24
+  const minWidth = 20 * f
+  const maxWidth = 60 * f
+  const height = 200 * f
+  const separatorPointCount = Math.ceil(24 * f)
 
   const sinf = (f) => 0.5 - s.cos(f * 360) / 2
   const serp = (f, a, b) => a + (b - a) * sinf(f)
@@ -26,14 +26,14 @@ const s15 = (canvasSide) => (s) => {
       xy(0, height),
       xy(2 * (minWidth + maxWidth), 0),
     )) {
-      drawCurves(x, y - 200, true)
+      drawCurves(x, y - height, true)
     }
     for (const [x, y] of parallelogramGrid(
       canvasSide,
       xy(0, -height),
       xy(2 * (minWidth + maxWidth), 0),
     )) {
-      drawCurves(x + minWidth + maxWidth, y - 200 + height / 2, false)
+      drawCurves(x + minWidth + maxWidth, y - height + height / 2, false)
     }
 
     drawBorder(s, 'black', 2 * f)
@@ -59,7 +59,7 @@ const s15 = (canvasSide) => (s) => {
       c2dx = serp(fCurve, minWidth * 0.6, maxWidth * 0.4)
       ady = height * serp(fCurve, 0.2, 0.23)
 
-      const n = s.createVector(
+      const n = new Vector(
         dirY *
           s.PI *
           (maxWidth - minWidth) *

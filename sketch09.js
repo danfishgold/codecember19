@@ -63,9 +63,9 @@ const s09 = (canvasSide) => (s) => {
   }
 
   function drawTriangleShape(x, y, angle, alpha) {
-    const v1 = s.createVector(side * (1 / s.sqrt(3)), 0).rotate(angle)
-    const v2 = v1.copy().rotate(120)
-    const v3 = v2.copy().rotate(120)
+    const v1 = new Vector(side * (1 / s.sqrt(3)), 0).rotate(angle)
+    const v2 = v1.rotate(120)
+    const v3 = v2.rotate(120)
 
     s.beginShape()
     s.vertex(x + v1.x, y + v1.y)
@@ -77,9 +77,9 @@ const s09 = (canvasSide) => (s) => {
   }
 
   function drawTriangleMiddle(x, y, angle, alpha) {
-    const v1 = s.createVector(side * (1 / s.sqrt(3)), 0).rotate(angle)
-    const v2 = v1.copy().rotate(120)
-    const v3 = v2.copy().rotate(120)
+    const v1 = new Vector(side * (1 / s.sqrt(3)), 0).rotate(angle)
+    const v2 = v1.rotate(120)
+    const v3 = v2.rotate(120)
     // given a quad bezier curve from v1 to v3 with alpha*v2 as control
     // and a similar quad bezier from v1 to v2 with alpha*v2 as control,
     // which are the bezier curves used in drawTriangleShape,
@@ -94,13 +94,13 @@ const s09 = (canvasSide) => (s) => {
       [v3, v1, v2],
       [v2, v3, v1],
     ]) {
-      const q11 = p5.Vector.lerp(p1, p2.copy().mult(alpha), t)
-      const q12 = p5.Vector.lerp(p2.copy().mult(alpha), p3, t)
-      const r1 = p5.Vector.lerp(q11, q12, t)
+      const q11 = Vector.lerp(p1, p2.mult(alpha), t)
+      const q12 = Vector.lerp(p2.mult(alpha), p3, t)
+      const r1 = Vector.lerp(q11, q12, t)
 
-      const q21 = p5.Vector.lerp(p1, p2.copy().mult(alpha), 1 - t)
-      const q22 = p5.Vector.lerp(p2.copy().mult(alpha), p3, 1 - t)
-      const r2 = p5.Vector.lerp(q21, q22, 1 - t)
+      const q21 = Vector.lerp(p1, p2.mult(alpha), 1 - t)
+      const q22 = Vector.lerp(p2.mult(alpha), p3, 1 - t)
+      const r2 = Vector.lerp(q21, q22, 1 - t)
       const rr = lineLineIntersection(q11, q12, q21, q22)
 
       s.vertex(x + r1.x, y + r1.y)
@@ -116,6 +116,6 @@ const s09 = (canvasSide) => (s) => {
     const denomY = q12.y - q11.y + q22.y - q21.y
 
     const rrt = s.abs(denomX < 1e-5) ? nomY / denomY : nomX / denomX
-    return p5.Vector.add(q11, p5.Vector.mult(p5.Vector.sub(q12, q11), rrt))
+    return Vector.add(q11, Vector.mult(Vector.sub(q12, q11), rrt))
   }
 }

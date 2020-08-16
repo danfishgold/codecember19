@@ -53,9 +53,9 @@ const s05 = (canvasSide) => (s) => {
   }
 
   function hexagonPiece(x, y, angle) {
-    const v0 = s.createVector(1, 0).rotate(angle)
-    const v1 = v0.copy().rotate(-60)
-    const v2 = v0.copy().rotate(60)
+    const v0 = new Vector(1, 0).rotate(angle)
+    const v1 = v0.rotate(-60)
+    const v2 = v0.rotate(60)
 
     s.beginShape()
     s.vertex(x, y)

@@ -74,21 +74,21 @@ function mod(k, n) {
 }
 
 const v = (s, X, Y) => {
-  const add = p5.Vector.add
-  const mult = p5.Vector.mult
+  const add = Vector.add
+  const mult = Vector.mult
   const minus = (v) => mult(v, -1)
-  X = X || new p5.Vector(1, 0)
-  Y = Y || new p5.Vector(-X.y, X.x)
+  X = X || new Vector(1, 0)
+  Y = Y || new Vector(-X.y, X.x)
 
   const xy = (mx, my, vx, vy) => {
     vx = vx || X
     vy = vy || Y
-    return p5.Vector.add(p5.Vector.mult(vx, mx), p5.Vector.mult(vy, my))
+    return Vector.add(Vector.mult(vx, mx), Vector.mult(vy, my))
   }
 
   const vectorAt = (x, y, mx, my, vx, vy) => {
     const delta = xy(mx, my, vx, vy)
-    return new p5.Vector(x + delta.x, y + delta.y)
+    return new Vector(x + delta.x, y + delta.y)
   }
 
   const arrayAt = (x, y, mx, my, vx, vy) =>
@@ -138,21 +138,21 @@ const v = (s, X, Y) => {
 }
 
 const vHex = (s, r, angle1, angle2) => {
-  const add = p5.Vector.add
-  const mult = p5.Vector.mult
+  const add = Vector.add
+  const mult = Vector.mult
   const minus = (v) => mult(v, -1)
   angle2 = angle2 || angle1 + 60
-  A = new p5.Vector(r, 0).rotate(angle1 * (s.PI / 180))
-  B = new p5.Vector(r, 0).rotate(angle2 * (s.PI / 180))
+  A = new Vector(r, 0).rotate(angle1)
+  B = new Vector(r, 0).rotate(angle2)
   C = add(B, minus(A))
 
   const abc = (ma, mb, mc) => {
-    return p5.Vector.add(p5.Vector.mult(A, ma - mc), p5.Vector.mult(B, mb + mc))
+    return Vector.add(Vector.mult(A, ma - mc), Vector.mult(B, mb + mc))
   }
 
   const vectorAt = (x, y, ma, mb, mc) => {
     const delta = abc(ma, mb, mc)
-    return new p5.Vector(x + delta.x, y + delta.y)
+    return new Vector(x + delta.x, y + delta.y)
   }
 
   const arrayAt = (x, y, ma, mb, mc) =>
@@ -178,9 +178,9 @@ const vHex = (s, r, angle1, angle2) => {
 }
 
 function splitBezier(p0, p1, p2, t) {
-  const q1 = p5.Vector.lerp(p0, p1, t)
-  const q2 = p5.Vector.lerp(p1, p2, t)
-  const r1 = p5.Vector.lerp(q1, q2, t)
+  const q1 = Vector.lerp(p0, p1, t)
+  const q2 = Vector.lerp(p1, p2, t)
+  const r1 = Vector.lerp(q1, q2, t)
 
   return {
     before: {
@@ -271,7 +271,7 @@ function parallelogramCoefficients(x, y, v1, v2) {
 }
 
 function* parallelogramGrid(canvasSide, v1, v2) {
-  v2 = v2 || v1.copy().rotate(90)
+  v2 = v2 || v1.rotate(90)
   const d = canvasSide / 2
   const [n1, m1] = parallelogramCoefficients(-d, -d, v1, v2)
   const [n2, m2] = parallelogramCoefficients(-d, d, v1, v2)

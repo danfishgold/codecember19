@@ -7,8 +7,8 @@ const s10 = (canvasSide) => (s) => {
   const f = canvasSide / 800
   const edge = 30 * f
 
-  const v1 = s.createVector(edge, 0).rotate(65 * (s.PI / 180))
-  const v2 = s.createVector(edge, 0).rotate(-50 * (s.PI / 180))
+  const v1 = new Vector(edge, 0).rotate(65)
+  const v2 = new Vector(edge, 0).rotate(-50)
 
   const { minus, xy, vertexAt } = v(s, v1, v2)
 

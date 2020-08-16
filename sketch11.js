@@ -19,8 +19,8 @@ const s11 = (canvasSide) => (s) => {
     stroke: '#355070',
   }
 
-  const X = new p5.Vector(1, 0).rotate(s.PI / 4)
-  const Y = new p5.Vector(0, 1).rotate(s.PI / 4)
+  const X = new Vector(1, 0).rotate(45)
+  const Y = new Vector(0, 1).rotate(45)
   const { xy, vertexAt, rectAt } = v(s, X, Y)
 
   s.draw = () => {
@@ -28,7 +28,7 @@ const s11 = (canvasSide) => (s) => {
     s.stroke(colors.stroke)
     s.background(colors.background)
     const v = xy(crossWidth + shadowWidth, crossWidth + crossHeight)
-    const u = s.createVector(v.y, -v.x)
+    const u = new Vector(v.y, -v.x)
 
     for (const [x, y, i, j] of parallelogramGrid(canvasSide, v, u)) {
       drawCross(x, y, mod(i + j, colors.crosses.length))

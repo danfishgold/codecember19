@@ -49,29 +49,23 @@ const s08 = (canvasSide) => (s) => {
   }
 
   function drawTrianglePart(x, y, angle) {
-    const pt = s.createVector(x, y)
-    const long = s.createVector(edge, 0).rotate(angle)
-    const side1 = long
-      .copy()
-      .rotate(180 - 30)
-      .mult(s.sqrt(3) / 3)
+    const pt = new Vector(x, y)
+    const long = new Vector(edge, 0).rotate(angle)
+    const side1 = long.rotate(180 - 30).mult(s.sqrt(3) / 3)
 
-    const side2 = long
-      .copy()
-      .rotate(180 + 30)
-      .mult(s.sqrt(3) / 3)
+    const side2 = long.rotate(180 + 30).mult(s.sqrt(3) / 3)
 
     s.beginShape()
     jaggedVertices(pt, side1)
-    jaggedVertices(pt.copy().add(side1), long)
-    jaggedVertices(pt.copy().add(side1).add(long), side2)
+    jaggedVertices(pt.add(side1), long)
+    jaggedVertices(pt.add(side1).add(long), side2)
 
     // s.vertex(x + v2.x, y + v2.y)
     s.endShape()
   }
 
   function jaggedVertices(origin, edge) {
-    const v = edge.copy().rotate(6).mult(0.55)
+    const v = edge.rotate(6).mult(0.55)
     s.vertex(origin.x + v.x, origin.y + v.y)
     s.vertex(origin.x + edge.x - v.x, origin.y + edge.y - v.y)
     s.vertex(origin.x + edge.x, origin.y + edge.y)

@@ -8,12 +8,8 @@ const s22 = (canvasSide) => (s) => {
   const edge = 15 * f
   const angle1 = 45 // or maybe 0???????
   const angle2 = angle1 + 90
-  const v0 = s.createVector(edge, 0)
-  const { X, Y, xy, minus } = v(
-    s,
-    v0.copy().rotate(angle1 * (s.PI / 180)),
-    v0.copy().rotate(angle2 * (s.PI / 180)),
-  )
+  const v0 = new Vector(edge, 0)
+  const { X, Y, xy, minus } = v(s, v0.rotate(angle1), v0.rotate(angle2))
 
   // https://coolors.co/e3170a-a9e5bb-fcf6b1-f7b32b-48304b
   const colors = {

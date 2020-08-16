@@ -30,7 +30,7 @@ const s13 = (canvasSide) => (s) => {
     // I fudged all of these numbers
     const { bezierVertexAt, vertexAt, quadraticVertexAt } = v(
       s,
-      s.createVector(len, 0).rotate(angle),
+      new Vector(len, 0).rotate(angle),
     )
     s.beginShape()
     s.vertex(x, y)

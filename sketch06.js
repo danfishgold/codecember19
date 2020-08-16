@@ -57,10 +57,10 @@ const s06 = (canvasSide) => (s) => {
   }
 
   function trianglePiece(x, y, angle) {
-    const v = s.createVector(1, 0).rotate(angle)
+    const v = new Vector(1, 0).rotate(angle)
 
-    const v1 = v.copy().rotate(-60)
-    const v2 = v.copy().rotate(60)
+    const v1 = v.rotate(-60)
+    const v2 = v.rotate(60)
     s.beginShape()
     s.vertex(x, y)
     s.vertex(x + n * v1.x, y + n * v1.y)

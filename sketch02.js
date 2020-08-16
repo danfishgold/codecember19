@@ -52,15 +52,11 @@ const s02 = (canvasSide) => (s) => {
     const dx2 = ht * s.sin(angle)
     const dy2 = ht * s.cos(angle)
     s.strokeWeight(f)
-    s.quad(
-      x,
-      y,
-      x + dx1,
-      y + dy1,
-      x + dx1 + dx2,
-      y + dy1 + dy2,
-      x + dx2,
-      y + dy2,
-    )
+    s.beginShape()
+    s.vertex(x, y)
+    s.vertex(x + dx1, y + dy1)
+    s.vertex(x + dx1 + dx2, y + dy1 + dy2)
+    s.vertex(x + dx2, y + dy2)
+    s.endShape(s.CLOSE)
   }
 }

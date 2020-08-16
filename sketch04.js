@@ -8,7 +8,7 @@ const s04 = (canvasSide) => (s) => {
   const offsetX = -1.5 * l
   const offsetY = 4 * l
 
-  const { vertexAt, xy } = v(s, s.createVector(l, 0), s.createVector(0, l))
+  const { vertexAt, xy } = v(s, new Vector(l, 0), new Vector(0, l))
 
   // https://coolors.co/805d93-f49fbc-ffd3ba-231f20-bb4430
   const colors = {
