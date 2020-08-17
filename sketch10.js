@@ -20,16 +20,21 @@ const s10 = (canvasSide) => (s) => {
   s.draw = () => {
     s.background(colors.background)
     s.strokeWeight(5 * f)
-    s.strokeCap(s.PROJECT)
+    if (s.strokeCap) {
+      s.strokeCap(s.SQUARE)
+    }
 
+    s.noFill()
     for ([x, y, i, j] of parallelogramGrid(canvasSide, xy(3, 5), xy(-5, 3))) {
-      s.noFill()
       s.stroke(colors.lines[0])
       drawShape(x, y, 0)
-      s.stroke(colors.lines[1])
-      drawShape(x, y, 1)
       s.stroke(colors.lines[2])
       drawShape(x, y, 2)
+    }
+
+    for ([x, y, i, j] of parallelogramGrid(canvasSide, xy(3, 5), xy(-5, 3))) {
+      s.stroke(colors.lines[1])
+      drawShape(x, y, 1)
       s.stroke(colors.lines[3])
       drawShape(x, y, 3)
     }
