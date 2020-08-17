@@ -1,7 +1,6 @@
 const s18 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800
@@ -64,7 +63,7 @@ const s18 = (canvasSide) => (s) => {
     [(edge + smallEdge) / 2 + stroke, (edge - smallEdge) / 2 - stroke],
     [
       (edge + smallEdge) / 2 + stroke,
-      (edge + smallEdge) / 2 + stroke * Math.sin(22.5),
+      (edge + smallEdge) / 2 - stroke * dsin(22.5),
     ],
     [edge - stroke, edge - stroke * (1 + s2)],
     [edge - stroke, stroke],

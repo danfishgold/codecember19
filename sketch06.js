@@ -1,7 +1,6 @@
 const s06 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800

@@ -1,7 +1,6 @@
 const s15 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800
@@ -12,7 +11,7 @@ const s15 = (canvasSide) => (s) => {
   const height = 200 * f
   const separatorPointCount = Math.ceil(24 * f)
 
-  const sinf = (f) => 0.5 - s.cos(f * 360) / 2
+  const sinf = (f) => 0.5 - dcos(f * 360) / 2
   const serp = (f, a, b) => a + (b - a) * sinf(f)
 
   // https://coolors.co/361134-e7ad99-ce796b
@@ -61,9 +60,9 @@ const s15 = (canvasSide) => (s) => {
 
       const n = new Vector(
         dirY *
-          s.PI *
+          Math.PI *
           (maxWidth - minWidth) *
-          s.sin((curveIndex / curveCount) * 360),
+          dsin((curveIndex / curveCount) * 360),
         height,
       )
       s.fill(colors[mod(curveIndex, colors.length)])

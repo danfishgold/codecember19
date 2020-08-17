@@ -1,7 +1,6 @@
 const s03 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800
@@ -41,8 +40,8 @@ const s03 = (canvasSide) => (s) => {
     s.stroke(colors.star)
     s.strokeWeight(2 * f)
     for (const angle of [30, 90, 150, 210, 270, 330]) {
-      const dx = side * s.cos(angle)
-      const dy = side * s.sin(angle)
+      const dx = side * dcos(angle)
+      const dy = side * dsin(angle)
       const fudge = s.random(-0.1, 0)
       s.line(
         x,
@@ -53,8 +52,8 @@ const s03 = (canvasSide) => (s) => {
     }
 
     for (const angle of [0, 60, 120, 180, 240, 300]) {
-      const dx = side * s.cos(angle)
-      const dy = side * s.sin(angle)
+      const dx = side * dcos(angle)
+      const dy = side * dsin(angle)
       // small lines
       s.stroke(colors.star)
       s.strokeWeight(f)

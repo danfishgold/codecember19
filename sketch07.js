@@ -1,7 +1,6 @@
 const s07 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800
@@ -17,7 +16,7 @@ const s07 = (canvasSide) => (s) => {
     for ([x, y, i, j, ind] of fillingHexagonalGrid(
       canvasSide,
       edge * s.sqrt(39),
-      s.atan(-2 * s.sqrt(3)),
+      datan(-2 * s.sqrt(3)),
     )) {
       drawManyThings(x, y, ((i + j) % 3) * 60)
     }

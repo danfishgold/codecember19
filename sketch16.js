@@ -1,13 +1,12 @@
 const s16 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800
   const s2 = s.sqrt(2)
   const len = 22 * f
-  const side = 3 * s2 - 1 + Math.sin(s.PI / 8)
+  const side = 3 * s2 - 1 + dsin(22.5)
   const a1 = side / s2 - 2 * s2 + 1
   const { xy, rectAt } = v(s, new Vector(len, 0))
 

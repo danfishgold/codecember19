@@ -73,6 +73,28 @@ function mod(k, n) {
   }
 }
 
+const fromDegrees = Math.PI / 180
+const toDegrees = 180 / Math.PI
+
+function dsin(x) {
+  return Math.sin(x * fromDegrees)
+}
+function dcos(x) {
+  return Math.cos(x * fromDegrees)
+}
+function dtan(x) {
+  return Math.tan(x * fromDegrees)
+}
+function dasin(x) {
+  return Math.asin(x) * toDegrees
+}
+function dacos(x) {
+  return Math.acos(x) * toDegrees
+}
+function datan(x) {
+  return Math.atan(x) * toDegrees
+}
+
 const v = (s, X, Y) => {
   const add = Vector.add
   const mult = Vector.mult

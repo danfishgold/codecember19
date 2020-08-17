@@ -1,7 +1,6 @@
 const s02 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800
@@ -19,7 +18,7 @@ const s02 = (canvasSide) => (s) => {
   s.draw = () => {
     s.background(colors.background)
     const diagonal = s.sqrt(ht * ht + wd * wd + ht * wd) // cosine theorem
-    const angle = s.acos((ht + wd / 2) / diagonal) // cosine theorem again
+    const angle = dacos((ht + wd / 2) / diagonal) // cosine theorem again
     for (const [x, y] of hexagonalGrid(
       canvasSide / 2 - wd,
       canvasSide / 2 - ht / 2,
@@ -47,10 +46,10 @@ const s02 = (canvasSide) => (s) => {
   }
 
   function drawRhombus(x, y, angle) {
-    const dx1 = wd * s.sin(angle + 60)
-    const dy1 = wd * s.cos(angle + 60)
-    const dx2 = ht * s.sin(angle)
-    const dy2 = ht * s.cos(angle)
+    const dx1 = wd * dsin(angle + 60)
+    const dy1 = wd * dcos(angle + 60)
+    const dx2 = ht * dsin(angle)
+    const dy2 = ht * dcos(angle)
     s.strokeWeight(f)
     s.beginShape()
     s.vertex(x, y)

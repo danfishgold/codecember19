@@ -1,14 +1,13 @@
 const s23 = (canvasSide) => (s) => {
   s.setup = () => {
     s.createCanvas(canvasSide, canvasSide)
-    s.angleMode(s.DEGREES)
   }
 
   const f = canvasSide / 800
   const edge = 20 * f
   const angle = 90
   const s2 = s.sqrt(2)
-  const boop1 = 5 - s2 + Math.sin(22.5)
+  const boop1 = 5 - s2 - dsin(22.5)
   const boop2 = 3
   const boop3 = (2 + boop1 - boop2) / 2
   const v0 = new Vector(edge, 0)
@@ -35,7 +34,7 @@ const s23 = (canvasSide) => (s) => {
       canvasSide,
       xy(8 - s2 + boop1 - boop2, 6 + s2 - boop1 + boop2),
     )) {
-      drawUnit(x - 100, y + 100, 0 * (i + j))
+      drawUnit(x - 100 * f, y + 100 * f, 0 * (i + j))
     }
 
     drawBorder(s, null)

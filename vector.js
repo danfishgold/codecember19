@@ -1,6 +1,3 @@
-const fromDegrees = Math.PI / 180
-const toDegrees = 180 / Math.PI
-
 class Vector {
   constructor(x, y) {
     this.x = x
