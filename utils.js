@@ -164,9 +164,9 @@ const vHex = (s, r, angle1, angle2) => {
   const mult = Vector.mult
   const minus = (v) => mult(v, -1)
   angle2 = angle2 || angle1 + 60
-  A = new Vector(r, 0).rotate(angle1)
-  B = new Vector(r, 0).rotate(angle2)
-  C = add(B, minus(A))
+  const A = new Vector(r, 0).rotate(angle1)
+  const B = new Vector(r, 0).rotate(angle2)
+  const C = add(B, minus(A))
 
   const abc = (ma, mb, mc) => {
     return Vector.add(Vector.mult(A, ma - mc), Vector.mult(B, mb + mc))
@@ -185,6 +185,12 @@ const vHex = (s, r, angle1, angle2) => {
     s.vertex(vec.x, vec.y)
   }
 
+  const quadraticVertexAt = (x, y, cma, cmb, cmc, ama, amb, amc) => {
+    const [cx, cy] = arrayAt(x, y, cma, cmb, cmc)
+    const [ax, ay] = arrayAt(x, y, ama, amb, amc)
+    s.quadraticVertex(cx, cy, ax, ay)
+  }
+
   return {
     add,
     mult,
@@ -196,6 +202,7 @@ const vHex = (s, r, angle1, angle2) => {
     vectorAt,
     arrayAt,
     vertexAt,
+    quadraticVertexAt,
   }
 }
 
