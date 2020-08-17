@@ -17,6 +17,7 @@ const s01 = (canvasSide) => (s) => {
   }
 
   s.draw = () => {
+    s.noStroke()
     for (const [x, y, i, j] of parallelogramGrid(
       canvasSide,
       mult(X, side),
@@ -24,7 +25,7 @@ const s01 = (canvasSide) => (s) => {
     )) {
       drawSquare(x, y, (i + j) % 2)
     }
-    drawBorder(s, 'black')
+    drawBorder(s, null)
     s.noLoop()
   }
 
