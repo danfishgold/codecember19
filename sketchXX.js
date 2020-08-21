@@ -4,15 +4,16 @@ const sXX = (canvasSide) => (s) => {
   }
 
   const f = canvasSide / 800
-
+  const stroke = 1 * f
   const palette = shufflePalette('')
   const colors = {}
   console.log(colors)
 
   s.draw = () => {
-    s.strokeWeight(f)
+    s.strokeWeight(stroke)
+    s.background('white')
 
-    drawBorder(s, 'black')
+    drawBorder(s, 'black', stroke)
     s.noLoop()
   }
 }
