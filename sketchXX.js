@@ -5,6 +5,7 @@ const sXX = (canvasSide) => (s) => {
 
   const f = canvasSide / 800
   const stroke = 1 * f
+
   const palette = shufflePalette('')
   const colors = {}
   console.log(colors)
