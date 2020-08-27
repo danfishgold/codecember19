@@ -4,19 +4,20 @@ const s32 = (canvasSide) => (s) => {
   }
 
   const f = canvasSide / 800
-  const stroke = 1 * f
-  const wd = 14 * f
-  const hexEdge = wd * 1.5
-  const triEdge = wd * 6.8
+  const stroke = 2 * f
+  const wd = 16 * f
+  const hexEdge = wd * 2.5
+  const triEdge = wd * 9.8
   const baseAngle = 30
 
-  const palette = shufflePalette('')
-  const colors = {}
-  console.log(colors)
+  // https://coolors.co/f45b69-f6e8ea
+  const colors = { stroke: '#f45b69', fill: '#f6e8ea' }
 
   s.draw = () => {
     s.strokeWeight(stroke)
-    s.background('white')
+    s.stroke(colors.stroke)
+    s.fill(colors.fill)
+    s.background(colors.fill)
 
     const { abc } = vHex(s, 1, baseAngle, baseAngle - 60)
 
@@ -30,32 +31,38 @@ const s32 = (canvasSide) => (s) => {
       drawUnit(x, y, baseAngle)
     }
 
-    drawBorder(s, 'black', stroke)
+    drawBorder(s, colors.stroke, stroke)
     s.noLoop()
   }
 
   function drawUnit(x, y, baseAngle) {
     const { arrayAt, vectorAt } = vHex(s, 1, baseAngle, baseAngle - 60)
-    drawTriangle(...arrayAt(x, y, 0, 0, wd), triEdge, baseAngle - 60)
-    drawHexagon(...arrayAt(x, y, 0, triEdge + wd, wd), hexEdge, baseAngle - 60)
-    drawTriangle(...arrayAt(x, y, 0, hexEdge + wd, 0), triEdge, baseAngle)
+    // [x0,y0] = -[the middle of the hexagon]
+    const [x0, y0] = arrayAt(x, y, 0, -triEdge - wd, -wd - hexEdge)
+    drawTriangle(...arrayAt(x0, y0, 0, 0, wd), triEdge, baseAngle - 60)
+    drawHexagon(
+      ...arrayAt(x0, y0, 0, triEdge + wd, wd),
+      hexEdge,
+      baseAngle - 60,
+    )
+    drawTriangle(...arrayAt(x0, y0, 0, hexEdge + wd, 0), triEdge, baseAngle)
 
     drawParallelogram(
-      vectorAt(x, y, 0, 0, 0),
+      vectorAt(x0, y0, 0, 0, 0),
       baseAngle - 60,
       false,
       triEdge + hexEdge + wd,
     )
 
     drawParallelogram(
-      vectorAt(x, y, 0, hexEdge, 0),
+      vectorAt(x0, y0, 0, hexEdge, 0),
       baseAngle,
       false,
       triEdge + hexEdge + wd,
     )
 
     drawParallelogram(
-      vectorAt(x, y, 0, hexEdge + triEdge + wd, hexEdge + wd),
+      vectorAt(x0, y0, 0, hexEdge + triEdge + wd, hexEdge + wd),
       baseAngle + 60,
       false,
       triEdge + hexEdge + wd,
