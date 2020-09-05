@@ -7,8 +7,8 @@ const s05 = (canvasSide) => (s) => {
   const l = canvasSide / 20
   const n = l * (s.sqrt(3) / 2)
 
-  // https://coolors.co/757780-dedaba-387780-dbd4d3-e83151
-  const colors = ['#dedaba', '#387780', '#e83151']
+  // https://coolors.co/ed6a5a-f4f1bb-9bc1bc-5d576b-e6ebe0
+  const colors = ['#ed6a5a', '#9bc1bc', '#e6ebe0']
 
   function color(index) {
     const mod = index % 3

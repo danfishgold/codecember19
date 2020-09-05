@@ -4,14 +4,14 @@ const s07 = (canvasSide) => (s) => {
   }
 
   const f = canvasSide / 800
-
   const edge = canvasSide / 26
+  const stroke = 0 * f
 
   // https://coolors.co/463f1a-60492c-0e79b2-0d2149-ffca3a
   const colors = ['#0e79b2', '#ffca3a', '#0d2149']
 
   s.draw = () => {
-    s.strokeWeight(f)
+    s.strokeWeight(stroke)
 
     for ([x, y, i, j, ind] of fillingHexagonalGrid(
       canvasSide,
@@ -20,7 +20,7 @@ const s07 = (canvasSide) => (s) => {
     )) {
       drawManyThings(x, y, ((i + j) % 3) * 60)
     }
-    drawBorder(s, 'black')
+    drawBorder(s, 'black', stroke)
     s.noLoop()
   }
 
