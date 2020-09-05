@@ -32,7 +32,7 @@ with open(filename(n), 'w') as f:
 print(f'Created {filename(n)}')
 
 # Add an import to the new script file
-with open('index.html', 'r') as f:
+with open('development.html', 'r') as f:
     lines = f.readlines()
 
 last_import_index, last_import = index_of_last_line_matching(r'<script src="sketch\d+\.js"></script>', lines)
@@ -43,7 +43,7 @@ last_pattern_index, last_pattern = index_of_last_line_matching(r' {8}s\d+,', lin
 new_pattern = ' ' * 8 + f's{n:02},\n'
 lines.insert(last_pattern_index+1, new_pattern)
 
-with open('index.html', 'w') as f:
+with open('development.html', 'w') as f:
     f.write(''.join(lines))
 
-print(f'Imported it in index.html')
+print(f'Imported it in development.html')

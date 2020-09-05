@@ -32,6 +32,7 @@ class Sketch {
     const svg = document.createElementNS(ns, 'svg')
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
     svg.setAttribute('preserveAspectRatio', 'xMidYMin slice')
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
     if (document.getElementsByTagName('main').length === 0) {
       var m = document.createElement('main')
       document.body.appendChild(m)
