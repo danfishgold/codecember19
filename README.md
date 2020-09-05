@@ -8,7 +8,7 @@ This is the fourth entry in a somewaht yearly thing I like to do where I work on
 
 It's static! which means you don't need a build process: you can just open `development.html` in your browser and see the stuff. There's a flag of `generateSvgs`. When it's `true` the patterns will be generated into svgs and you'll see a download button. When it's `false` the patterns will be generated using p5.js onto `canvas`es.
 
-Each sketch lives in a `sketch<INDEX>.js` file. There's also `sketchXX.js`, which is used as a template. To create a new pattern you can run `./another`, which will make a copy of the template and change some stuff to make it work in `development.html`.
+Each sketch lives in a `sketches/sketch<INDEX>.js` file. There's also `sketchXX.js`, which is used as a template. To create a new pattern you can run `./another`, which will make a copy of the template and change some stuff to make it work in `development.html`.
 
 ## How it works
 

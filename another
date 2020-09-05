@@ -5,7 +5,7 @@ from os import path
 import re
 
 def filename(n):
-    return f'sketch{n:02d}.js'
+    return f'sketches/sketch{n:02d}.js'
 
 def index_of_last_line_matching(pattern, lines):
     index = None
@@ -35,8 +35,8 @@ print(f'Created {filename(n)}')
 with open('development.html', 'r') as f:
     lines = f.readlines()
 
-last_import_index, last_import = index_of_last_line_matching(r'<script src="sketch\d+\.js"></script>', lines)
-new_import = re.sub(r'sketch\d+\.js', filename(n), last_import)
+last_import_index, last_import = index_of_last_line_matching(r'<script src="sketches/sketch\d+\.js"></script>', lines)
+new_import = re.sub(r'sketches/sketch\d+\.js', filename(n), last_import)
 lines.insert(last_import_index+1, new_import)
 
 last_pattern_index, last_pattern = index_of_last_line_matching(r' {8}s\d+,', lines)
