@@ -23,13 +23,14 @@ const s32 = (canvasSide) => (s) => {
 
     const diff = abc(-wd - hexEdge, -hexEdge, triEdge + wd)
 
-    for (const [x, y] of fillingHexagonalGrid(
+    drawInFillingHexagonalGrid(
+      s,
       canvasSide,
       diff.mag(),
       diff.heading(),
-    )) {
-      drawUnit(x, y, baseAngle)
-    }
+      'unit-32',
+      (x, y) => drawUnit(x, y, baseAngle)
+    )
 
     drawBorder(s, colors.stroke, stroke)
     s.noLoop()
@@ -43,7 +44,7 @@ const s32 = (canvasSide) => (s) => {
     drawHexagon(
       ...arrayAt(x0, y0, 0, triEdge + wd, wd),
       hexEdge,
-      baseAngle - 60,
+      baseAngle - 60
     )
     drawTriangle(...arrayAt(x0, y0, 0, hexEdge + wd, 0), triEdge, baseAngle)
 
@@ -51,21 +52,21 @@ const s32 = (canvasSide) => (s) => {
       vectorAt(x0, y0, 0, 0, 0),
       baseAngle - 60,
       false,
-      triEdge + hexEdge + wd,
+      triEdge + hexEdge + wd
     )
 
     drawParallelogram(
       vectorAt(x0, y0, 0, hexEdge, 0),
       baseAngle,
       false,
-      triEdge + hexEdge + wd,
+      triEdge + hexEdge + wd
     )
 
     drawParallelogram(
       vectorAt(x0, y0, 0, hexEdge + triEdge + wd, hexEdge + wd),
       baseAngle + 60,
       false,
-      triEdge + hexEdge + wd,
+      triEdge + hexEdge + wd
     )
   }
 
@@ -92,31 +93,31 @@ const s32 = (canvasSide) => (s) => {
       vectorAt(x, y, edge, -wd, wd),
       baseAngle - 60,
       true,
-      edge + wd,
+      edge + wd
     )
     drawTrapesoid(
       vectorAt(x, y, edge, edge - wd, 0),
       baseAngle - 120,
       true,
-      edge + wd,
+      edge + wd
     )
     drawTrapesoid(
       vectorAt(x, y, edge + wd, edge - wd, edge),
       baseAngle - 180,
       true,
-      edge + wd,
+      edge + wd
     )
     drawTrapesoid(
       vectorAt(x, y, wd, edge, edge),
       baseAngle - 240,
       true,
-      edge + wd,
+      edge + wd
     )
     drawTrapesoid(
       vectorAt(x, y, wd, 0, edge + wd),
       baseAngle - 300,
       true,
-      edge + wd,
+      edge + wd
     )
 
     drawHexagon(...arrayAt(x, y, wd, 0, wd), edge - wd, baseAngle)
@@ -127,7 +128,7 @@ const s32 = (canvasSide) => (s) => {
       s,
       1,
       angle1,
-      rightSide ? angle1 + 60 : angle1 - 60,
+      rightSide ? angle1 + 60 : angle1 - 60
     )
     s.beginShape()
     vertexAt(p0.x, p0.y, 0, 0, 0)
@@ -142,7 +143,7 @@ const s32 = (canvasSide) => (s) => {
       s,
       1,
       angle1,
-      rightSide ? angle1 + 60 : angle1 - 60,
+      rightSide ? angle1 + 60 : angle1 - 60
     )
     s.beginShape()
     vertexAt(p0.x, p0.y, 0, 0, 0)

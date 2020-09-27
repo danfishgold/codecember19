@@ -29,13 +29,22 @@ const s26 = (canvasSide) => (s) => {
     const v2 = v1.rotate(60)
     const dist = wd + ht * Math.sqrt(3)
 
-    for (const [x, y] of fillingHexagonalGrid(canvasSide, dist, 0)) {
-      drawTriangle(x + v1.x, y + v1.y, 90, false)
-    }
-
-    for (const [x, y] of fillingHexagonalGrid(canvasSide, dist, 0)) {
-      drawTriangle(x + v2.x, y + v2.y, 30, true)
-    }
+    drawInFillingHexagonalGrid(
+      s,
+      canvasSide,
+      dist,
+      0,
+      'triangle-1-26',
+      (x, y) => drawTriangle(x + v1.x, y + v1.y, 90, false)
+    )
+    drawInFillingHexagonalGrid(
+      s,
+      canvasSide,
+      dist,
+      0,
+      'triangle-2-26',
+      (x, y) => drawTriangle(x + v2.x, y + v2.y, 30, true)
+    )
 
     drawBorder(s, colors.strokes, 8 * f)
     s.noLoop()

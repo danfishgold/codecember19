@@ -22,23 +22,24 @@ const s31 = (canvasSide) => (s) => {
 
     const diff = new Vector(
       hexagonEdge + triangleEdge + (4 / Math.sqrt(3)) * stroke,
-      0,
+      0
     )
       .add(
         new Vector(
           triangleEdge + (2 / Math.sqrt(3)) * stroke - hexagonEdge,
-          0,
-        ).rotate(-120),
+          0
+        ).rotate(-120)
       )
       .rotate(-30)
 
-    for (const [x, y] of fillingHexagonalGrid(
+    drawInFillingHexagonalGrid(
+      s,
       canvasSide,
       diff.mag(),
       diff.heading() + baseAngle,
-    )) {
-      drawUnit(x, y, baseAngle)
-    }
+      'unit-31',
+      (x, y) => drawUnit(x, y, baseAngle)
+    )
 
     drawBorder(s, colors.strokes, stroke)
     s.noLoop()

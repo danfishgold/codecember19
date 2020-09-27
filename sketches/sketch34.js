@@ -22,13 +22,14 @@ const s34 = (canvasSide) => (s) => {
     s.strokeWeight(stroke)
     s.background(colors.background)
 
-    for (const [x, y, i, j] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       xy(edge + wd, edge + wd),
       xy(edge + wd, -edge - wd),
-    )) {
-      drawUnit(x, y)
-    }
+      'unit-34',
+      drawUnit
+    )
 
     drawBorder(s, 'black', stroke)
     s.noLoop()

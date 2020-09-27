@@ -20,20 +20,23 @@ const s15 = (canvasSide) => (s) => {
   s.draw = () => {
     const x = canvasSide / 2
     const y = canvasSide / 3
-    for (const [x, y, i, j] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       xy(0, height),
       xy(2 * (minWidth + maxWidth), 0),
-    )) {
-      drawCurves(x, y - height, true)
-    }
-    for (const [x, y] of parallelogramGrid(
+      'unit-1-15',
+      (x, y) => drawCurves(x, y - height, true)
+    )
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       xy(0, -height),
       xy(2 * (minWidth + maxWidth), 0),
-    )) {
-      drawCurves(x + minWidth + maxWidth, y - height + height / 2, false)
-    }
+      'unit-2-15',
+      (x, y) =>
+        drawCurves(x + minWidth + maxWidth, y - height + height / 2, false)
+    )
 
     drawBorder(s, 'black', 2 * f)
     s.noLoop()
@@ -51,7 +54,7 @@ const s15 = (canvasSide) => (s) => {
       const dxPrev = serp(
         (curveIndex + dirY * 1) / curveCount,
         minWidth,
-        maxWidth,
+        maxWidth
       )
       const dyPrev = height * ((curveIndex + dirY * 1) / curveCount)
       c1f = serp(fCurve, 0.1, 0.15)
@@ -63,7 +66,7 @@ const s15 = (canvasSide) => (s) => {
           Math.PI *
           (maxWidth - minWidth) *
           dsin((curveIndex / curveCount) * 360),
-        height,
+        height
       )
       s.fill(colors[mod(curveIndex, colors.length)])
       s.noStroke()
@@ -78,7 +81,7 @@ const s15 = (canvasSide) => (s) => {
         c2dx,
         dy - dirY * ady,
         0,
-        dy - dirY * ady,
+        dy - dirY * ady
       )
       bezierVertexAt(
         x,
@@ -88,7 +91,7 @@ const s15 = (canvasSide) => (s) => {
         -dx + c1f * n.x,
         dy - dirY * c1f * n.y,
         -dx,
-        dy,
+        dy
       )
       vertexAt(x, y, -dxPrev, dyPrev)
 

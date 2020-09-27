@@ -32,26 +32,46 @@ const s24 = (canvasSide) => (s) => {
         canvasSide / 2 + hexagonSide + gap / s.sqrt(3),
         hexagonSide * Math.sqrt(3) + gap,
         Math.ceil(canvasSide / (hexagonSide * Math.sqrt(3) + gap)),
-        0,
-      ),
+        0
+      )
     )
 
-    for (const [x, y] of points) {
-      s.fill(colors.hexagons)
-      drawHexagon(x, y)
-    }
-    for (const [x, y] of points) {
-      for (const angle of [0, 60]) {
-        const xt = x + (hexagonSide + gap / s.sqrt(3)) * dcos(angle + 30)
-        const yt = y + (hexagonSide + gap / s.sqrt(3)) * dsin(angle + 30)
-        // s.fill(someColor)
-        // drawTriangle(xt, yt, angle - 30)
-        s.fill(colors.triangles)
-        for (const cornerAngle of [0, 120, 240]) {
-          drawTriangleCorner(xt, yt, angle + cornerAngle)
+    drawInHexagonalGrid(
+      s,
+      canvasSide / 2,
+      canvasSide / 2 + hexagonSide + gap / s.sqrt(3),
+      hexagonSide * Math.sqrt(3) + gap,
+      Math.ceil(canvasSide / (hexagonSide * Math.sqrt(3) + gap)),
+      0,
+      'hexagon-24',
+      (x, y) => {
+        s.fill(colors.hexagons)
+        drawHexagon(x, y)
+      }
+    )
+
+    drawInHexagonalGrid(
+      s,
+      canvasSide / 2,
+      canvasSide / 2 + hexagonSide + gap / s.sqrt(3),
+      hexagonSide * Math.sqrt(3) + gap,
+      Math.ceil(canvasSide / (hexagonSide * Math.sqrt(3) + gap)),
+      0,
+      'other-bits-24',
+      (x, y) => {
+        for (const angle of [0, 60]) {
+          const xt = x + (hexagonSide + gap / s.sqrt(3)) * dcos(angle + 30)
+          const yt = y + (hexagonSide + gap / s.sqrt(3)) * dsin(angle + 30)
+          // s.fill(someColor)
+          // drawTriangle(xt, yt, angle - 30)
+          s.fill(colors.triangles)
+          for (const cornerAngle of [0, 120, 240]) {
+            drawTriangleCorner(xt, yt, angle + cornerAngle)
+          }
         }
       }
-    }
+    )
+
     drawBorder(s, colors.strokes, strokeWeight)
     s.noLoop()
   }
@@ -74,7 +94,7 @@ const s24 = (canvasSide) => (s) => {
       const { vertexAt, quadraticVertexAt } = vHex(
         s,
         triangleSide,
-        baseAngle + angle + 90,
+        baseAngle + angle + 90
       )
       vertexAt(x0, y0, 0, 0, triangleCurveStart)
       quadraticVertexAt(x0, y0, 0, 0, 0, 0, triangleCurveStart, 0)

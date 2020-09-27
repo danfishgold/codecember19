@@ -14,7 +14,7 @@ const s33 = (canvasSide) => (s) => {
   const { vertexAt, quadraticVertexAt, xy, arrayAt } = v(
     s,
     new Vector(1, 0).rotate(-angle),
-    new Vector(1, 0).rotate(180 + angle),
+    new Vector(1, 0).rotate(180 + angle)
   )
 
   // // https://coolors.co/f1e4e8-e2dcde-ceb1be-b97375-2d2d34
@@ -38,13 +38,17 @@ const s33 = (canvasSide) => (s) => {
     s.stroke(colors.strokes)
     s.background(colors.background)
 
-    for (const [x, y] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       xy(length + curveLength, -length - curveLength),
       xy(0, -length - curveLength).add(new Vector(0, fudge)),
-    )) {
-      drawUnit(...arrayAt(x, y - fudge / 2, curveLength / 2, -curveLength / 2))
-    }
+      'unit-33',
+      (x, y) =>
+        drawUnit(
+          ...arrayAt(x, y - fudge / 2, curveLength / 2, -curveLength / 2)
+        )
+    )
 
     drawBorder(s, colors.strokes, stroke)
     s.noLoop()

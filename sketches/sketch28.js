@@ -26,17 +26,20 @@ const s28 = (canvasSide) => (s) => {
     s.background(colors.strokes)
     const boop = wd + ht + 2 * stroke
 
-    for (const [x, y] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       new Vector(boop, 0),
       new Vector(boop / 2, boop / 2),
-    )) {
-      drawUnit(x, y, true)
-      drawUnit(x + wd / 2 + ht / 2 + stroke, y, false)
-      s.fill(colors.squares)
-      drawSquare(x + wd / 2 + stroke, y - ht / 2)
-      drawSquare(x - wd / 2 - stroke - edge, y - ht / 2)
-    }
+      'unit-28',
+      (x, y) => {
+        drawUnit(x, y, true)
+        drawUnit(x + wd / 2 + ht / 2 + stroke, y, false)
+        s.fill(colors.squares)
+        drawSquare(x + wd / 2 + stroke, y - ht / 2)
+        drawSquare(x - wd / 2 - stroke - edge, y - ht / 2)
+      }
+    )
     drawBorder(s, colors.strokes, stroke)
     s.noLoop()
   }

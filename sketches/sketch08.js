@@ -13,29 +13,29 @@ const s08 = (canvasSide) => (s) => {
   s.draw = () => {
     s.strokeWeight(stroke)
 
-    for ([x, y, i, j, ind] of fillingHexagonalGrid(
+    for (const [x, y, i, j] of fillingHexagonalGrid(
       canvasSide,
       edge * s.sqrt(3),
-      0,
+      0
     )) {
-      drawHexagon(x, y, 0)
+      drawHexagon(x, y, i + j)
     }
     drawBorder(s, 'black', stroke)
     s.noLoop()
   }
 
-  function drawHexagon(x, y, angle) {
-    for ([x, y, _, _, ind, r] of hexagonalGrid(
-      x,
-      y,
+  function drawHexagon(x0, y0, colorOffset) {
+    for (const [x, y, _1, _2, ind, r] of hexagonalGrid(
+      x0,
+      y0,
       edge * (s.sqrt(3) / 3),
       1,
-      0,
+      0
     )) {
       if (r == 0) {
         continue
       }
-      drawTriangle(x, y, 30 - 60 * ind, i + j)
+      drawTriangle(x, y, 30 - 60 * ind, colorOffset)
     }
   }
 

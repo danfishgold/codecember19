@@ -25,16 +25,17 @@ const s36 = (canvasSide) => (s) => {
     const diff = abc(
       edge * (4 / 3) + s3 * stroke,
       stroke / s3,
-      edge * (2 / 3) + stroke / s3,
+      edge * (2 / 3) + stroke / s3
     )
 
-    for (const [x, y] of fillingHexagonalGrid(
+    drawInFillingHexagonalGrid(
+      s,
       canvasSide,
       diff.mag(),
       diff.heading(),
-    )) {
-      drawUnit(x, y)
-    }
+      'unit-36',
+      drawUnit
+    )
 
     drawBorder(s, colors.strokes, stroke)
     s.noLoop()

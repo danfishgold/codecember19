@@ -15,11 +15,18 @@ const s13 = (canvasSide) => (s) => {
     s.strokeWeight(len / 16)
     s.stroke(colors.strokes)
     s.noFill()
-    for (const [x, y] of fillingHexagonalGrid(canvasSide, 1.5 * len, -33)) {
-      for (const angle of [0, 120, 240]) {
-        drawShape(x, y, 18 + angle)
+    drawInFillingHexagonalGrid(
+      s,
+      canvasSide,
+      1.5 * len,
+      -33,
+      'unit-13',
+      (x, y) => {
+        for (const angle of [0, 120, 240]) {
+          drawShape(x, y, 18 + angle)
+        }
       }
-    }
+    )
 
     drawBorder(s, colors.strokes, len / 16)
     s.noLoop()
@@ -29,7 +36,7 @@ const s13 = (canvasSide) => (s) => {
     // I fudged all of these numbers
     const { bezierVertexAt, vertexAt, quadraticVertexAt } = v(
       s,
-      new Vector(len, 0).rotate(angle),
+      new Vector(len, 0).rotate(angle)
     )
     s.beginShape()
     s.vertex(x, y)

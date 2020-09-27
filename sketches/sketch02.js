@@ -19,15 +19,17 @@ const s02 = (canvasSide) => (s) => {
     s.background(colors.background)
     const diagonal = s.sqrt(ht * ht + wd * wd + ht * wd) // cosine theorem
     const angle = dacos((ht + wd / 2) / diagonal) // cosine theorem again
-    for (const [x, y] of hexagonalGrid(
+    drawInHexagonalGrid(
+      s,
       canvasSide / 2 - wd,
       canvasSide / 2 - ht / 2,
       diagonal,
       3,
       angle + 90,
-    )) {
-      drawThreeRhombi(x, y)
-    }
+      'unit-02',
+      drawThreeRhombi
+    )
+
     drawBorder(s, 'black')
     s.noLoop()
   }
@@ -41,7 +43,7 @@ const s02 = (canvasSide) => (s) => {
     drawRhombus(
       x + (wd * s.sqrt(3)) / 2 + (ht * s.sqrt(3)) / 2,
       y + ht / 2 - wd / 2,
-      240,
+      240
     )
   }
 

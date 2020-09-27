@@ -30,12 +30,14 @@ const s23 = (canvasSide) => (s) => {
   s.draw = () => {
     s.noStroke()
 
-    for (const [x, y, i, j] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       xy(8 - s2 + boop1 - boop2, 6 + s2 - boop1 + boop2),
-    )) {
-      drawUnit(x - 100 * f, y + 100 * f, 0 * (i + j))
-    }
+      undefined,
+      'unit-23',
+      (x, y) => drawUnit(x - 100 * f, y + 100 * f, 0)
+    )
 
     drawBorder(s, null)
     s.noLoop()

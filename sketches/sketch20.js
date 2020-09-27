@@ -24,13 +24,14 @@ const s20 = (canvasSide) => (s) => {
     s.noStroke()
     s.background(colors.strokes)
 
-    for (const [x, y] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       xy(edge1 + edge2 + 2 * stroke, 0),
       xy(0, edge2 + edge1 + 2 * stroke),
-    )) {
-      drawBaseShape(x - squareSide / 2, y + squareSide / 2)
-    }
+      'unit-20',
+      (x, y) => drawBaseShape(x - squareSide / 2, y + squareSide / 2)
+    )
 
     drawBorder(s, colors.strokes, stroke)
     s.noLoop()

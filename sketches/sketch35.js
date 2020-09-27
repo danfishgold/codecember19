@@ -17,9 +17,14 @@ const s35 = (canvasSide) => (s) => {
     s.stroke(colors.strokes)
     s.background('white')
 
-    for (const [x, y] of parallelogramGrid(canvasSide, xy(3, 3))) {
-      drawUnit(x, y)
-    }
+    drawInParallelogramGrid(
+      s,
+      canvasSide,
+      xy(3, 3),
+      undefined,
+      'unit-35',
+      drawUnit
+    )
 
     drawBorder(s, colors.strokes, stroke)
     s.noLoop()

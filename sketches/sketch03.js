@@ -22,15 +22,17 @@ const s03 = (canvasSide) => (s) => {
 
   s.draw = () => {
     s.background(colors.background)
-    for ([x, y] of hexagonalGrid(
+    drawInHexagonalGrid(
+      s,
       canvasSide / 2 - side / 4,
       canvasSide / 2 + side / 2,
       side * s.sqrt(3),
       5,
       90,
-    )) {
-      drawStar(x, y)
-    }
+      'unit-03',
+      drawStar
+    )
+
     drawBorder(s, colors.triangle)
     s.noLoop()
   }
@@ -47,7 +49,7 @@ const s03 = (canvasSide) => (s) => {
         x,
         y,
         x + (lengths.big + fudge) * dx,
-        y + (lengths.big + fudge) * dy,
+        y + (lengths.big + fudge) * dy
       )
     }
 
@@ -61,7 +63,7 @@ const s03 = (canvasSide) => (s) => {
         x - lengths.small * dx,
         y - lengths.small * dy,
         x + lengths.small * dx,
-        y + lengths.small * dy,
+        y + lengths.small * dy
       )
 
       // extra lines
@@ -71,7 +73,7 @@ const s03 = (canvasSide) => (s) => {
         x + lengths.extra0 * dx,
         y + lengths.extra0 * dy,
         x + lengths.extra1 * dx,
-        y + lengths.extra1 * dy,
+        y + lengths.extra1 * dy
       )
     }
   }

@@ -16,16 +16,20 @@ const s14 = (canvasSide) => (s) => {
     s.background(colors.lines)
     s.noStroke()
 
-    for (const [x, y] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       xy(4 * edge, 0),
       xy(-edge, 4 * edge),
-    )) {
-      s.fill(colors.cross)
-      drawCross(x, y)
-      s.fill(colors.h)
-      drawH(x - 3 * edge, y - edge)
-    }
+      'unit-14',
+      (x, y) => {
+        s.fill(colors.cross)
+        drawCross(x, y)
+        s.fill(colors.h)
+        drawH(x - 3 * edge, y - edge)
+      }
+    )
+
     drawBorder(s, colors.lines, lineWidth)
     s.noLoop()
   }

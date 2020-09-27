@@ -15,7 +15,7 @@ const s29 = (canvasSide) => (s) => {
   const { vectorAt, vertexAt, xy } = v(
     s,
     new Vector(edge1, 0),
-    new Vector(0, edge2),
+    new Vector(0, edge2)
   )
 
   // https://coolors.co/4c5454-ff715b-ffffff-1ea896-523f38
@@ -34,10 +34,14 @@ const s29 = (canvasSide) => (s) => {
   const colors = { shape1: '#450503', shape2: '#5E0411', strokes: '#dab785' }
 
   s.draw = () => {
-    for (const [x, y] of parallelogramGrid(canvasSide, xy(2, 0), xy(1, 1))) {
-      drawUnit(x, y)
-    }
-
+    drawInParallelogramGrid(
+      s,
+      canvasSide,
+      xy(2, 0),
+      xy(1, 1),
+      'unit-29',
+      drawUnit
+    )
     drawBorder(s, colors.strokes, stroke1)
     s.noLoop()
   }

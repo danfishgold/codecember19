@@ -30,9 +30,9 @@ const s18 = (canvasSide) => (s) => {
       canvasSide,
       new Vector(
         (edge + edge / 2 - (3 * stroke) / 2) * s2,
-        (edge - stroke) / s2,
+        (edge - stroke) / s2
       ),
-      new Vector(0, s2 * (edge - stroke)),
+      new Vector(0, s2 * (edge - stroke))
     )) {
       drawUnit(x, y, j)
     }
@@ -72,7 +72,7 @@ const s18 = (canvasSide) => (s) => {
 
   function drawHalfUnit(x, y, dir) {
     s.beginShape()
-    for ([mx, my] of coefficients) {
+    for (const [mx, my] of coefficients) {
       if (dir) {
         s.vertex(x + (mx - my) / s2, y - (mx + my) / s2)
       } else {

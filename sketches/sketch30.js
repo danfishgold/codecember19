@@ -32,13 +32,14 @@ const s30 = (canvasSide) => (s) => {
     s.background(colors.hexagons)
     s.stroke(colors.strokes)
 
-    for (const [x, y] of fillingHexagonalGrid(
+    drawInFillingHexagonalGrid(
+      s,
       canvasSide,
       distance,
       baseAngle + 30,
-    )) {
-      drawFlower(x, y)
-    }
+      'unit-30',
+      drawFlower
+    )
 
     drawBorder(s, colors.strokes, strokes.circumefrence)
     s.noLoop()
@@ -114,7 +115,7 @@ const s30 = (canvasSide) => (s) => {
         pollenLength + 3,
         0,
         pollenLength,
-        -strokes.pollen / 2,
+        -strokes.pollen / 2
       )
       s.endShape(s.CLOSE)
     }

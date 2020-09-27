@@ -13,10 +13,10 @@ const s07 = (canvasSide) => (s) => {
   s.draw = () => {
     s.strokeWeight(stroke)
 
-    for ([x, y, i, j, ind] of fillingHexagonalGrid(
+    for (const [x, y, i, j] of fillingHexagonalGrid(
       canvasSide,
       edge * s.sqrt(39),
-      datan(-2 * s.sqrt(3)),
+      datan(-2 * s.sqrt(3))
     )) {
       drawManyThings(x, y, ((i + j) % 3) * 60)
     }

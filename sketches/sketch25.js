@@ -26,35 +26,44 @@ const s25 = (canvasSide) => (s) => {
 
     // center the grid around a triangle instead of a hexagon
     const p0 = new Vector(hexagonSide + gap / s.sqrt(3), 0).rotate(
-      angle0 - 30 + 90,
+      angle0 - 30 + 90
     )
 
-    const points = Array.from(
-      hexagonalGrid(
-        canvasSide / 2 + p0.x,
-        canvasSide / 2 + p0.y,
-        hexagonSide * Math.sqrt(3) + gap,
-        Math.ceil(canvasSide / (hexagonSide * Math.sqrt(3) + gap)),
-        angle0 - 30,
-      ),
+    drawInHexagonalGrid(
+      s,
+      canvasSide / 2 + p0.x,
+      canvasSide / 2 + p0.y,
+      hexagonSide * Math.sqrt(3) + gap,
+      Math.ceil(canvasSide / (hexagonSide * Math.sqrt(3) + gap)),
+      angle0 - 30,
+      'hexagon-25',
+      (x, y) => {
+        s.fill(colors.hexagons)
+        drawHexagon(x, y)
+      }
     )
 
-    for (const [x, y] of points) {
-      s.fill(colors.hexagons)
-      drawHexagon(x, y)
-    }
-    for (const [x, y] of points) {
-      for (const angle of [0, 60]) {
-        const xt = x + (hexagonSide + gap / s.sqrt(3)) * dcos(angle + angle0)
-        const yt = y + (hexagonSide + gap / s.sqrt(3)) * dsin(angle + angle0)
-        s.fill(colors.triangles)
-        drawTriangle(xt, yt, angle + angle0 - 60)
-        s.fill(colors.squareIntersections)
-        for (const cornerAngle of [0, 120, 240]) {
-          drawSquareIntersections(xt, yt, angle + cornerAngle + angle0 - 30)
+    drawInHexagonalGrid(
+      s,
+      canvasSide / 2 + p0.x,
+      canvasSide / 2 + p0.y,
+      hexagonSide * Math.sqrt(3) + gap,
+      Math.ceil(canvasSide / (hexagonSide * Math.sqrt(3) + gap)),
+      angle0 - 30,
+      'other-bits-25',
+      (x, y) => {
+        for (const angle of [0, 60]) {
+          const xt = x + (hexagonSide + gap / s.sqrt(3)) * dcos(angle + angle0)
+          const yt = y + (hexagonSide + gap / s.sqrt(3)) * dsin(angle + angle0)
+          s.fill(colors.triangles)
+          drawTriangle(xt, yt, angle + angle0 - 60)
+          s.fill(colors.squareIntersections)
+          for (const cornerAngle of [0, 120, 240]) {
+            drawSquareIntersections(xt, yt, angle + cornerAngle + angle0 - 30)
+          }
         }
       }
-    }
+    )
     drawBorder(s, colors.strokes, 4 * f)
     s.noLoop()
   }

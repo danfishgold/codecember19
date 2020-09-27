@@ -23,13 +23,14 @@ const s09 = (canvasSide) => (s) => {
     s.strokeWeight(f)
     s.stroke(colors.strokes)
 
-    for ([x, y, i, j] of fillingHexagonalGrid(
+    drawInFillingHexagonalGrid(
+      s,
       canvasSide,
       (side + s.sqrt(3) * spacing) * s.sqrt(3),
       0,
-    )) {
-      drawFlower(x, y, 0)
-    }
+      'unit-09',
+      (x, y) => drawFlower(x, y, 0)
+    )
 
     drawBorder(s, colors.strokes, 2 * f)
     s.noLoop()
@@ -41,7 +42,7 @@ const s09 = (canvasSide) => (s) => {
       y,
       side / s.sqrt(3) + spacing,
       1,
-      angle,
+      angle
     )) {
       if (r === 0) {
         continue

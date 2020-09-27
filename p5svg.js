@@ -16,6 +16,13 @@ class Sketch {
     this.styleStack = []
 
     this.svg = null
+    this.children = []
+    this.defs = []
+
+    this.currentDefChildren = []
+    this.addingToDef = false
+
+    this.isDansSvgThing = true
   }
 
   sqrt(x) {
@@ -33,6 +40,7 @@ class Sketch {
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
     svg.setAttribute('preserveAspectRatio', 'xMidYMin slice')
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    svg.setAttributeNS(ns, 'xlink', 'http://www.w3.org/1999/xlink')
     if (document.getElementsByTagName('main').length === 0) {
       var m = document.createElement('main')
       document.body.appendChild(m)
@@ -49,7 +57,7 @@ class Sketch {
   noLoop() {}
 
   line(x1, y1, x2, y2) {
-    this._addElement('line', {
+    this._addChild('line', {
       x1,
       y1,
       x2,
@@ -58,7 +66,7 @@ class Sketch {
     })
   }
   triangle(x1, y1, x2, y2, x3, y3) {
-    this._addElement('polygon', {
+    this._addChild('polygon', {
       points: `${x1}, ${y1} ${x2}, ${y2} ${x3}, ${y3}`,
       ...this._styleAttrs,
     })
@@ -66,7 +74,7 @@ class Sketch {
   ellipse(cx, cy, wd, ht) {
     const rx = wd / 2
     const ry = (ht || wd) / 2
-    this._addElement('ellipse', {
+    this._addChild('ellipse', {
       cx,
       cy,
       rx,
@@ -92,7 +100,7 @@ class Sketch {
   }
   bezierVertex(x1, y1, x2, y2, x, y) {
     this.currentPathParts.push(
-      Sketch.round`C ${x1} ${y1}, ${x2} ${y2}, ${x} ${y}`,
+      Sketch.round`C ${x1} ${y1}, ${x2} ${y2}, ${x} ${y}`
     )
   }
   beginContour() {
@@ -104,13 +112,13 @@ class Sketch {
     if (shouldClose) {
       this.currentPathParts.push('Z')
     }
-    this._addElement('path', {
+    this._addChild('path', {
       d: this.currentPathParts.join(' '),
       ...this._styleAttrs,
     })
   }
   background(color) {
-    this._addElement('rect', {
+    this._addChild('rect', {
       x: 0,
       y: 0,
       width: this.width,
@@ -143,12 +151,55 @@ class Sketch {
     this.style = { ...this.styleStack.pop() }
   }
 
-  _addElement(name, attrs) {
-    const boi = document.createElementNS(ns, name)
+  _addChild(name, attrs) {
+    if (this.addingToDef) {
+      this.currentDefChildren.push({ name, attrs })
+    } else {
+      this.children.push({ name, attrs })
+    }
+  }
+
+  _startDef() {
+    this.addingToDef = true
+  }
+
+  _endDef(id) {
+    this.defs.push({ id, children: this.currentDefChildren })
+    this.addingToDef = false
+    this.currentDefChildren = []
+  }
+
+  _appendToElement(parent, tagName, attrs) {
+    const boi = document.createElementNS(ns, tagName)
     for (const [attr, value] of Object.entries(attrs)) {
       boi.setAttribute(attr === 'strokeWidth' ? 'stroke-width' : attr, value)
     }
-    this.svg.appendChild(boi)
+    parent.appendChild(boi)
+  }
+
+  _populateSvg(svg, children, defs) {
+    if (defs.length > 0) {
+      const defsElement = document.createElementNS(ns, 'defs')
+      for (const { id, children } of defs) {
+        const defElement = document.createElementNS(ns, 'g')
+        defElement.setAttribute('id', id)
+        children.forEach(({ name, attrs }) =>
+          this._appendToElement(defElement, name, attrs)
+        )
+        defsElement.appendChild(defElement)
+      }
+      svg.appendChild(defsElement)
+    }
+    children.forEach(({ name, attrs }) =>
+      this._appendToElement(svg, name, attrs)
+    )
+  }
+
+  use(id, x, y) {
+    this._addChild('use', {
+      href: `#${id}`,
+      transform: Sketch.round`translate(${x}, ${y})`,
+    })
   }
 
   get _styleAttrs() {
@@ -182,5 +233,6 @@ class p5Svg {
     buildSketch(sketch)
     sketch.setup()
     sketch.draw()
+    sketch._populateSvg(sketch.svg, sketch.children, sketch.defs)
   }
 }

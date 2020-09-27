@@ -21,13 +21,14 @@ const s17 = (canvasSide) => (s) => {
     s.background(colors.background)
     s.noFill()
 
-    for ([x, y] of parallelogramGrid(
+    drawInParallelogramGrid(
+      s,
       canvasSide,
       abc(-4 / 3, 2 / 3, 0),
       abc(2, 0, 0),
-    )) {
-      drawUnit(x, y)
-    }
+      'unit-17',
+      drawUnit
+    )
 
     drawBorder(s, colors.strokes)
     s.noLoop()

@@ -35,10 +35,17 @@ const s27 = (canvasSide) => (s) => {
     const secondCopyDist = (len + gap) / 2 + diag / Math.sqrt(2)
     const unitDist = gap + len + diag * Math.sqrt(2)
 
-    for (const [x, y] of parallelogramGrid(canvasSide, xy(unitDist, 0))) {
-      drawUnit(x, y, false)
-      drawUnit(...arrayAt(x, y, secondCopyDist, -secondCopyDist), true)
-    }
+    drawInParallelogramGrid(
+      s,
+      canvasSide,
+      xy(unitDist, 0),
+      undefined,
+      'unit-27',
+      (x, y) => {
+        drawUnit(x, y, false)
+        drawUnit(...arrayAt(x, y, secondCopyDist, -secondCopyDist), true)
+      }
+    )
 
     drawBorder(s, null, 0)
     s.noLoop()
